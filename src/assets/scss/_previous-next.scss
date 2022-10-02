@@ -1,0 +1,52 @@
+.#{$sliderm-class} {
+  &__button {
+    &--previous,
+    &--next {
+      position: absolute;
+      top: calc(50% - 16px);
+      display: inline-block;
+      overflow: hidden;
+      width: 32px;
+      height: 32px;
+      background-color: #ddd;
+      font-size: 0;
+      cursor: pointer;
+
+      @include border-radius(50%);
+    }
+
+    &--previous {
+      left: -16px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 5px;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-right: 10px solid #222;
+        border-bottom: 10px solid transparent;
+        border-left: 10px solid transparent;
+      }
+    }
+
+    &--next {
+      right: -16px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 5px;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-left: 10px solid #222;
+      }
+    }
+  }
+}

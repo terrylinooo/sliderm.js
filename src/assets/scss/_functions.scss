@@ -1,0 +1,8 @@
+/* stylelint-disable value-no-vendor-prefix */
+/* stylelint-disable property-no-vendor-prefix */
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}

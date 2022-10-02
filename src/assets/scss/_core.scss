@@ -1,0 +1,17 @@
+.#{$sliderm-class} {
+  position: relative;
+
+  &__slides {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  &__slide {
+    box-sizing: border-box;
+
+    img {
+      width: 100%;
+    }
+  }
+}

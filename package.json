@@ -1,0 +1,48 @@
+{
+  "name": "sliderm",
+  "version": "1.0.0",
+  "description": "A simple slider library.",
+  "main": "dist/sliderm.min.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "watch": "webpack --watch --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/terrylinooo/sliderm.js.git"
+  },
+  "keywords": [
+    "slider"
+  ],
+  "author": "Terry L.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/terrylinooo/sliderm.js/issues"
+  },
+  "homepage": "https://github.com/terrylinooo/sliderm",
+  "devDependencies": {
+    "@babel/core": "^7.19.1",
+    "@babel/preset-env": "^7.19.1",
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
+    "eslint": "^8.24.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.8",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "mini-css-extract-plugin": "^2.6.1",
+    "prettier": "^2.7.1",
+    "sass": "^1.55.0",
+    "sass-loader": "^13.0.2",
+    "script-loader": "^0.7.2",
+    "stylelint": "^14.12.1",
+    "stylelint-config-standard-scss": "^5.0.0",
+    "stylelint-order": "^5.0.0",
+    "terser-webpack-plugin": "^5.3.6",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  }
+}

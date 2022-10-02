@@ -1,0 +1,84 @@
+/*!*************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/assets/scss/index.scss ***!
+  \*************************************************************************************************************************************************/
+/* stylelint-disable value-no-vendor-prefix */
+/* stylelint-disable property-no-vendor-prefix */
+.sliderm {
+  position: relative;
+}
+.sliderm__slides {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+.sliderm__slide {
+  box-sizing: border-box;
+}
+.sliderm__slide img {
+  width: 100%;
+}
+
+.sliderm__button--previous, .sliderm__button--next {
+  position: absolute;
+  top: calc(50% - 16px);
+  display: inline-block;
+  overflow: hidden;
+  width: 32px;
+  height: 32px;
+  background-color: #ddd;
+  font-size: 0;
+  cursor: pointer;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+.sliderm__button--previous {
+  left: -16px;
+}
+.sliderm__button--previous::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-right: 10px solid #222;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid transparent;
+}
+.sliderm__button--next {
+  right: -16px;
+}
+.sliderm__button--next::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #222;
+}
+
+.sliderm__paginations {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+.sliderm__pagination {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  margin: 0 2px;
+  border: 2px solid #aaa;
+  cursor: pointer;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+.sliderm__pagination[data-active=true] {
+  border: 2px solid rgb(0, 160, 160);
+}
