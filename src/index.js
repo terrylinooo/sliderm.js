@@ -112,13 +112,16 @@ class Sliderm {
    * @return {Array}
    */
   getCurrentIndex() {
-    const orderNumber = Number(this.items[0].getAttribute('data-order'));
+    let orderNumber = Number(this.items[0].getAttribute('data-order'));
     let index = 0;
+
+    if (this.options.grouping) {
+      orderNumber = (orderNumber - 1) * this.options.columns + 1;
+    }
+
     if (orderNumber === 1) {
       index = 0;
-    } else if (orderNumber < this.itemCount) {
-      index = this.itemCount - orderNumber + 1;
-    } else if (orderNumber === this.itemCount) {
+    } else if (orderNumber <= this.itemCount) {
       index = this.itemCount - orderNumber + 1;
     } else {
       index = this.itemCount - orderNumber - 1;
