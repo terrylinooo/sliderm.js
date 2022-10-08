@@ -3,7 +3,7 @@ import selector from './core/selector';
 import { components, modules } from './core/extenstion';
 import EventDispatcher from './core/events/event-dispatcher';
 import dom from './utilities/dom';
-import log from './utilities/console';
+import { log } from './utilities/console';
 
 /**
  * Main class.
@@ -18,13 +18,18 @@ class Sliderm {
     this.options = Object.assign(config, options);
     this.event = new EventDispatcher();
     this.root = root;
+    this.slider = dom.find(this.root, selector.sliderContainer);
     this.items = [];
     this.itemCount = 0;
+    this.position = 1;
+    this.liveItems = [];
     this.modules = {};
-    this.updateItems();
-    this.updateGroupCount();
+    this.#updateItems();
+    this.#updateGroupCount();
     this.#mountModules();
     this.#initialize();
+    this.#updateLiveItems();
+    this.slideTo(1);
   }
 
   /**
@@ -35,6 +40,7 @@ class Sliderm {
       this.go('width', item);
       this.go('spacing', item);
       this.go('grouping', item, index);
+      this.go('clone', item, index);
     });
   }
 
@@ -55,12 +61,47 @@ class Sliderm {
   }
 
   /**
+   * Update slide items.
+   */
+  #updateItems() {
+    this.items = Array.from(dom.find(this.root, selector.sliderContainer).children);
+    this.itemCount = this.items.length;
+  }
+
+  /**
+   * Update slide items including cloned.
+   */
+  #updateLiveItems() {
+    if (!this.itemCount) {
+      return;
+    }
+    this.liveItems = Array.from(dom.find(this.root, selector.sliderContainer).children);
+  }
+
+  /**
+   * Update group count.
+   */
+  #updateGroupCount() {
+    const columns = this.getOption('columns');
+    this.groupCount = Math.ceil(this.itemCount / columns);
+  }
+
+  /**
    * The root DOM of the slider.
    *
    * @return {Element}
    */
   getRoot() {
     return this.root;
+  }
+
+  /**
+   * The slider container.
+   *
+   * @return {Element}
+   */
+  getContainer() {
+    return this.sliderContainer;
   }
 
   /**
@@ -82,22 +123,6 @@ class Sliderm {
   }
 
   /**
-   * Update slide items.
-   */
-  updateItems() {
-    this.items = Array.from(dom.find(this.root, selector.sliderContainer).children);
-    this.itemCount = this.items.length;
-  }
-
-  /**
-   * Update group count.
-   */
-  updateGroupCount() {
-    const columns = this.getOption('columns');
-    this.groupCount = Math.ceil(this.itemCount / columns);
-  }
-
-  /**
    * Get the slide items.
    *
    * @return {Array}
@@ -107,26 +132,22 @@ class Sliderm {
   }
 
   /**
-   * Get the current index number, right beign on the visable area of slider.
+   * Get the current position, right beign on the visable area of slider.
    *
    * @return {Array}
    */
-  getCurrentIndex() {
-    let orderNumber = Number(this.items[0].getAttribute('data-order'));
-    let index = 0;
+  getPosition() {
+    return this.position;
+  }
 
-    if (this.options.grouping) {
-      orderNumber = (orderNumber - 1) * this.options.columns + 1;
-    }
-
-    if (orderNumber === 1) {
-      index = 0;
-    } else if (orderNumber <= this.itemCount) {
-      index = this.itemCount - orderNumber + 1;
-    } else {
-      index = this.itemCount - orderNumber - 1;
-    }
-    return index;
+  /**
+   * Set the current position.
+   *
+   * @param {Number} position The postition number.
+   * @return {Array}
+   */
+  updatePosition(position) {
+    this.position = position;
   }
 
   /**
@@ -141,6 +162,15 @@ class Sliderm {
   }
 
   /**
+   * Slide to specific pagination.
+   *
+   * @param {Number} pagination The pagination number.
+   */
+  slideTo(pagination) {
+    this.go('slide', pagination);
+  }
+
+  /**
    * Call the module.
    *
    * @param {String} module The module name.
@@ -151,7 +181,7 @@ class Sliderm {
       log(`Invalid module name: ${module}`);
       return;
     }
-    this.modules[module](this, ...args);
+    this.modules[module](this, this.slider, ...args);
   }
 
   /**

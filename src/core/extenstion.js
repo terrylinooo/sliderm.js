@@ -6,6 +6,7 @@ import trasnform from './modules/transform';
 import width from './modules/width';
 import spacing from './modules/spacing';
 import grouping from './modules/grouping';
+import clone from './modules/clone';
 
-export const modules = [move, transition, trasnform, width, spacing, grouping];
+export const modules = [move, transition, trasnform, width, spacing, grouping, clone];
 export const components = [pagination, previousNext];

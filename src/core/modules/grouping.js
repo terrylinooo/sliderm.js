@@ -2,9 +2,10 @@
  * Set the grouping number for each slide item.
  *
  * @param {Object} sliderm The Sliderm instance.
+ * @param {Element} slider The DOM element of the slider container.
  * @param {...any} args The arguments
  */
-export default function grouping(sliderm, ...args) {
+export default function grouping(sliderm, slider, ...args) {
   const [item, index] = args;
   const isGrouping = sliderm.getOption('grouping');
   const orderNumber = index + 1;

@@ -1,10 +1,14 @@
 .#{$sliderm-class} {
   position: relative;
 
+  &__slider {
+    overflow: hidden;
+  }
+
   &__slides {
     display: flex;
-    overflow: hidden;
     width: 100%;
+    transition: all 0s linear 0s;
   }
 
   &__slide {

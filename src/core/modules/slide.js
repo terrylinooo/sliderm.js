@@ -1,71 +1,70 @@
-import { goPreviousItem, goPreviousGroup } from './slide/previous';
-import { goNextItem, goNextGroup } from './slide/next';
+import Position from './position';
 import { queue } from '../../utilities/await';
 
 /**
  * Position the slide items horizontally.
  *
  * @param {Object} sliderm The Sliderm object.
+ * @param {Element} slider The DOM element of the slider container.
  * @param {...any} args The arguments
  */
-export default function slide(sliderm, ...args) {
+export default function slide(sliderm, slider, ...args) {
   const [direction] = args;
-  const items = sliderm.getItems();
-  const itemCount = sliderm.getItemCount();
-  const groupCount = sliderm.getGroupCount();
   const isGrouping = sliderm.getOption('grouping');
-  const columns = sliderm.getOption('columns');
   const duration = sliderm.getOption('duration');
-  const originalPosition = sliderm.getCurrentIndex() + 1;
-  const unitCount = isGrouping ? groupCount : itemCount;
-  let currentPagi = originalPosition;
-  let activePagi = 0;
-  let arrow = direction;
-  let steps = 1;
+  const columns = sliderm.getOption('columns');
+  const isLoop = sliderm.getOption('loop');
+  const width = sliderm.getItems()[0].offsetWidth;
+  const position = new Position(sliderm);
+  const maxPosition = position.maximum();
+  let calculatedPosition = position.calculate(direction, isLoop);
+  let isReposition = false;
+  let distance = 1;
+  let axis = 0;
+
+  if (calculatedPosition < 1) {
+    isReposition = true;
+  } else if (calculatedPosition > maxPosition) {
+    isReposition = true;
+  }
 
   if (isGrouping) {
-    const originalGroup = Math.ceil(originalPosition / columns);
-    currentPagi = originalGroup;
+    distance = 0 - calculatedPosition;
+    axis = width * distance * columns;
+  } else {
+    distance = 1 - columns - calculatedPosition;
+    axis = width * distance;
   }
 
-  if (typeof direction === 'number') {
-    arrow = direction > currentPagi ? '>' : '<';
-    steps = direction > currentPagi ? direction - currentPagi : currentPagi - direction;
-    activePagi = direction;
-  } else if (direction === '>') {
-    activePagi = currentPagi + 1;
-    if (activePagi > unitCount) {
-      activePagi = 1;
-    }
-  } else if (direction === '<') {
-    activePagi = currentPagi - 1;
-    if (activePagi === 0) {
-      activePagi = unitCount;
-    }
-  }
+  // Event: slide.start
+  sliderm.emit('slide.start', calculatedPosition);
 
-  if (currentPagi === activePagi) {
-    return;
-  }
+  // Start sliding.
+  sliderm.go('transition');
+  sliderm.go('transform', axis);
+  sliderm.updatePosition(calculatedPosition);
 
-  sliderm.emit('slide.start', activePagi);
+  if (isReposition) {
+    queue(() => {
+      calculatedPosition = position.calculate(direction, false);
 
-  for (let i = 1; i <= steps; i += 1) {
-    const thisDuration = (i - 1) * duration;
-    if (arrow === '<') {
       if (isGrouping) {
-        queue(() => goPreviousGroup(sliderm, items, itemCount, groupCount), thisDuration);
+        distance = 0 - calculatedPosition;
+        axis = width * distance * columns;
       } else {
-        queue(() => goPreviousItem(sliderm, items, itemCount), thisDuration);
+        distance = 1 - columns - calculatedPosition;
+        axis = width * distance;
       }
-    } else if (arrow === '>') {
-      if (isGrouping) {
-        queue(() => goNextGroup(sliderm, items, itemCount, groupCount), thisDuration);
-      } else {
-        queue(() => goNextItem(sliderm, items, itemCount), thisDuration);
-      }
-    }
-  }
 
-  sliderm.emit('slide.end', activePagi);
+      sliderm.go('transition', 'stop');
+      sliderm.go('transform', axis);
+      sliderm.updatePosition(calculatedPosition);
+
+      // Event: slide.end
+      sliderm.emit('slide.end', calculatedPosition);
+    }, duration + 10);
+  } else {
+    // Event: slide.end
+    sliderm.emit('slide.end', calculatedPosition);
+  }
 }

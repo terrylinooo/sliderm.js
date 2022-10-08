@@ -21,6 +21,20 @@ export default {
   grouping: false,
 
   /**
+   * Transform the slider to a carousel.
+   *
+   * @type {Boolean}
+   */
+  loop: true,
+
+  /**
+   * Display the edge of the previous and next item.
+   *
+   * @type {Boolean}
+   */
+  preview: false,
+
+  /**
    * How many items per view
    *
    * @type {Boolean}

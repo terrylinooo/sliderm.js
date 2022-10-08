@@ -2,14 +2,15 @@
  * The control of transition effect for each slide item.
  *
  * @param {Object} sliderm The Sliderm object.
+ * @param {Element} slider The DOM elemet of the slider container.
  * @param {...any} args The arguments
  */
-export default function transition(sliderm, ...args) {
-  const [item, action] = args;
+export default function transition(sliderm, slider, ...args) {
+  const [action] = args;
   const duration = sliderm.getOption('duration');
   if (action === 'stop') {
-    item.style.removeProperty('transition');
+    slider.style.removeProperty('transition-duration');
     return;
   }
-  item.style.setProperty('transition', `all ${duration}ms linear`);
+  slider.style.setProperty('transition-duration', `${duration}ms`);
 }
