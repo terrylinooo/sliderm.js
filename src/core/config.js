@@ -21,18 +21,26 @@ export default {
   grouping: false,
 
   /**
-   * Transform the slider to a carousel.
+   * Transform the slider into a carousel.
    *
    * @type {Boolean}
    */
   loop: true,
 
   /**
-   * Display the edge of the previous and next item.
+   * Preview a part of the previous and next item.
    *
    * @type {Boolean}
    */
-  preview: false,
+  preview: true,
+
+  /**
+   * Display the edge of the previous and next items.
+   * This option only works when the preview option is on.
+   *
+   * @type {Number}
+   */
+  edge: 40,
 
   /**
    * How many items per view
@@ -54,4 +62,11 @@ export default {
    * @type {Number}
    */
   spacing: 10,
+
+  /**
+   * Align the slide items vertically.
+   *
+   * @type {String}
+   */
+  align: 'center',
 };

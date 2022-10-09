@@ -7,6 +7,18 @@ import width from './modules/width';
 import spacing from './modules/spacing';
 import grouping from './modules/grouping';
 import clone from './modules/clone';
+import align from './modules/align';
+import preview from './modules/preview';
 
-export const modules = [move, transition, trasnform, width, spacing, grouping, clone];
+export const modules = [
+  move,
+  transition,
+  trasnform,
+  width,
+  spacing,
+  grouping,
+  clone,
+  align,
+  preview,
+];
 export const components = [pagination, previousNext];

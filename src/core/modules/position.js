@@ -1,3 +1,6 @@
+/**
+ * This is not a pre-loading module. It is used in module slide.js
+ */
 export default class Position {
   /**
    * Constructor.

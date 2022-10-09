@@ -14,6 +14,10 @@ module.exports = (env, argv) => ({
     minimizer: [
       new TerserPlugin({
         extractComments: false,
+        terserOptions: {
+          keep_classnames: true,
+          keep_fnames: true,
+        },
       }),
     ],
   },

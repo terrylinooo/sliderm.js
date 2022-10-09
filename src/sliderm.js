@@ -3,7 +3,7 @@ import selector from './core/selector';
 import { components, modules } from './core/extenstion';
 import EventDispatcher from './core/events/event-dispatcher';
 import dom from './utilities/dom';
-import { log } from './utilities/console';
+import { error } from './utilities/console';
 
 /**
  * Main class.
@@ -12,7 +12,7 @@ class Sliderm {
   constructor(el, options) {
     const root = dom.get(el);
     if (!root) {
-      log(`The DOM "${el}" is invalid.`);
+      error(`The DOM "${el}" is invalid.`);
       return;
     }
     this.options = Object.assign(config, options);
@@ -42,6 +42,8 @@ class Sliderm {
       this.go('grouping', item, index);
       this.go('clone', item, index);
     });
+    this.go('align');
+    this.go('preview');
   }
 
   /**
@@ -178,7 +180,7 @@ class Sliderm {
    */
   go(module, ...args) {
     if (this.modules[module] === undefined) {
-      log(`Invalid module name: ${module}`);
+      error(`Invalid module name: ${module}`);
       return;
     }
     this.modules[module](this, this.slider, ...args);
