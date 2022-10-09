@@ -32,7 +32,7 @@ export default {
    *
    * @type {Boolean}
    */
-  preview: true,
+  preview: false,
 
   /**
    * Display the edge of the previous and next items.
