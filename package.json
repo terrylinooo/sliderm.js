@@ -1,7 +1,7 @@
 {
   "name": "sliderm",
   "version": "1.0.0",
-  "description": "A simple slider library.",
+  "description": "The most light-weight dependency-free slider and carousel JavaScript library.",
   "main": "dist/sliderm.min.js",
   "scripts": {
     "build": "webpack --mode production",
@@ -12,14 +12,19 @@
     "url": "git+https://github.com/terrylinooo/sliderm.js.git"
   },
   "keywords": [
-    "slider"
+    "carousel",
+    "gallery",
+    "swipe",
+    "slide",
+    "slider",
+    "slideshow"
   ],
-  "author": "Terry L.",
+  "author": "Terry L. ( https:://terryl.in )",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/terrylinooo/sliderm.js/issues"
   },
-  "homepage": "https://github.com/terrylinooo/sliderm",
+  "homepage": "https://sliderm.com",
   "devDependencies": {
     "@babel/core": "^7.19.1",
     "@babel/preset-env": "^7.19.1",
