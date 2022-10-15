@@ -14,21 +14,32 @@ export default function clone(sliderm, slider, ...args) {
   const items = sliderm.getItems();
   const className = selector.cloneItem.substring(1);
   const sideCount = columns;
-  let clondedNode = item.cloneNode(true);
+  const clonedNode = item.cloneNode(true);
+  let insertedClonedNode = null;
   let isInserted = false;
 
-  clondedNode.classList.add(className);
+  clonedNode.classList.add(className);
 
   if (index < sideCount) {
-    slider.appendChild(clondedNode);
+    slider.appendChild(clonedNode);
     isInserted = true;
   }
 
   if (index >= itemCount - sideCount) {
     if (isInserted) {
-      clondedNode = item.cloneNode(true);
-      clondedNode.classList.add(className);
+      insertedClonedNode = item.cloneNode(true);
+      insertedClonedNode.classList.add(className);
+      // Insert before the first slide item.
+      slider.insertBefore(insertedClonedNode, items[0]);
+    } else {
+      slider.insertBefore(clonedNode, items[0]);
     }
-    slider.insertBefore(clondedNode, items[0]);
   }
+
+  sliderm.on('destory', () => {
+    clonedNode.remove();
+    if (insertedClonedNode) {
+      insertedClonedNode.remove();
+    }
+  });
 }

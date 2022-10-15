@@ -12,4 +12,8 @@ export default function align(sliderm, slider) {
   } else if (option === 'bottom') {
     slider.style.setProperty('align-items', 'flex-end');
   }
+
+  sliderm.on('destory', () => {
+    slider.style.removeProperty('align-items');
+  });
 }

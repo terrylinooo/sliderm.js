@@ -8,4 +8,8 @@
 export default function transform(sliderm, slider, ...args) {
   const [xAxis] = args;
   slider.style.setProperty('transform', `translateX(${xAxis}px)`);
+
+  sliderm.on('destory', () => {
+    slider.style.removeProperty('transform');
+  });
 }

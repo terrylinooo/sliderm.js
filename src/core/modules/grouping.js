@@ -17,4 +17,8 @@ export default function grouping(sliderm, slider, ...args) {
     return;
   }
   item.setAttribute('data-order', orderNumber);
+
+  sliderm.on('destory', () => {
+    item.removeAttribute('data-order');
+  });
 }

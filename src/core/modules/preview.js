@@ -13,4 +13,8 @@ export default function preview(sliderm, slider) {
   }
 
   slider.style.setProperty('padding', `0 ${edge}px`);
+
+  sliderm.on('destory', () => {
+    slider.style.removeProperty('padding');
+  });
 }

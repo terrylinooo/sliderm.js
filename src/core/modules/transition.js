@@ -13,4 +13,8 @@ export default function transition(sliderm, slider, ...args) {
     return;
   }
   slider.style.setProperty('transition-duration', `${duration}ms`);
+
+  sliderm.on('destory', () => {
+    slider.style.removeProperty('transition-duration');
+  });
 }

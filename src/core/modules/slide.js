@@ -9,7 +9,7 @@ import { queue } from '../../utilities/await';
  * @param {...any} args The arguments
  */
 export default function slide(sliderm, slider, ...args) {
-  const [direction] = args;
+  const [direction, command] = args;
   const isGrouping = sliderm.getOption('grouping');
   const duration = sliderm.getOption('duration');
   const columns = sliderm.getOption('columns');
@@ -37,10 +37,10 @@ export default function slide(sliderm, slider, ...args) {
   }
 
   // Event: slide.start
-  sliderm.emit('slide.start', calculatedPosition);
+  sliderm.emit('slide.start');
 
   // Start sliding.
-  sliderm.go('transition');
+  sliderm.go('transition', command);
   sliderm.go('transform', axis);
   sliderm.updatePosition(calculatedPosition);
 
@@ -61,10 +61,10 @@ export default function slide(sliderm, slider, ...args) {
       sliderm.updatePosition(calculatedPosition);
 
       // Event: slide.end
-      sliderm.emit('slide.end', calculatedPosition);
+      sliderm.emit('slide.end');
     }, duration + 10);
   } else {
     // Event: slide.end
-    sliderm.emit('slide.end', calculatedPosition);
+    sliderm.emit('slide.end');
   }
 }

@@ -17,18 +17,25 @@ export default function previousNext(sliderm) {
   const init = () => {
     const prevButton = createButton('left');
     const nextButton = createButton('right');
-    const prevEvent = new EventAdapter(prevButton);
-    const nextEvent = new EventAdapter(nextButton);
+    const prevButtonEvent = new EventAdapter(prevButton);
+    const nextButtonEvent = new EventAdapter(nextButton);
 
     sliderm.getRoot().append(prevButton);
     sliderm.getRoot().append(nextButton);
 
-    prevEvent.on('click', () => {
+    prevButtonEvent.on('click', () => {
       sliderm.go('slide', '<');
     });
 
-    nextEvent.on('click', () => {
+    nextButtonEvent.on('click', () => {
       sliderm.go('slide', '>');
+    });
+
+    sliderm.on('destory', () => {
+      prevButtonEvent.destory();
+      nextButtonEvent.destory();
+      prevButton.remove();
+      nextButton.remove();
     });
   };
 

@@ -214,7 +214,16 @@ class Sliderm {
    * @param {Number} priority The priority of each event listener.
    */
   emit(name, ...args) {
-    this.event.emit(name, ...args);
+    const thisArgs = [this, ...args];
+    this.event.emit(name, ...thisArgs);
+  }
+
+  /**
+   * Destory appended DOM and attched events.
+   */
+  destory() {
+    this.event.emit('destory');
+    this.event.destory();
   }
 }
 

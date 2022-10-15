@@ -35,20 +35,26 @@ export default function pagination(sliderm) {
     event.on('click', (e) => {
       if (selector.paginationItem === `.${e.target.className}`) {
         const index = Array.prototype.indexOf.call(node.childNodes, e.target);
-        const pagiNumber = index + 1;
-        sliderm.go('slide', pagiNumber);
+        const paginationNumber = index + 1;
+        sliderm.go('slide', paginationNumber);
       }
     });
 
-    sliderm.on('slide.end', (position) => {
+    sliderm.on('slide.end', () => {
+      const position = sliderm.getPosition();
       const dots = dom.find(sliderm.getRoot(), selector.paginations).children;
       Array.from(dots).forEach((dot, index) => {
-        const pagiNumber = index + 1;
+        const paginationNumber = index + 1;
         dot.removeAttribute('data-active');
-        if (pagiNumber === position) {
+        if (paginationNumber === position) {
           dot.setAttribute('data-active', true);
         }
       });
+    });
+
+    sliderm.on('destory', () => {
+      event.destory();
+      node.remove();
     });
   };
 

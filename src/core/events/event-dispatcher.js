@@ -12,27 +12,27 @@ export default class eventDispatcher {
    *
    * @param {String} name The event name of each event listener.
    * @param {Function} handler The callback function of each event listener.
-   * @param {Number} priority The priority of each event listener.
    */
-  on(name, handler, priority = 0) {
+  on(name, handler) {
     if (!Object.prototype.hasOwnProperty.call(this.events, name)) {
       this.events[name] = [];
     }
-    this.events[name][priority] = handler;
+    this.events[name].push(handler);
   }
 
   /**
    * Remove an event listener.
    *
    * @param {String} name The event name of each event listener.
-   * @param {Number} priority The priority of each event listener.
+   * @param {Function} handler Used to identify the memory position to remove it.
    */
-  off(name, priority) {
-    if (priority !== undefined) {
-      const index = this.events[name].indexOf(priority);
-      if (index !== -1) {
-        this.events[name].splice(index, 1);
-      }
+  off(name, handler) {
+    if (handler !== undefined) {
+      this.events[name].forEach((item, index) => {
+        if (item === handler) {
+          this.events[name].splice(index, 1);
+        }
+      });
       return;
     }
     delete this.events[name];
