@@ -1,6 +1,5 @@
-import dom from '../utilities/dom';
-import selector from '../core/selector';
-import EventAdapter from '../core/events/event-adapter';
+import { setDom, findDom } from '../utilities/dom';
+import { cssPaginations, cssPaginationItem } from '../core/selector';
 
 /**
  * The view-component of Sliderm.
@@ -9,16 +8,31 @@ import EventAdapter from '../core/events/event-adapter';
  * @param {Object} sliderm The Sliderm instance.
  */
 export default function pagination(sliderm) {
+  /**
+   * Create a HTML DOM element for the pagination container.
+   *
+   * @return {Element}
+   */
   const createContainer = () => {
-    const container = dom.set('div', selector.paginations);
+    const container = setDom('div', cssPaginations);
     return container;
   };
 
+  /**
+   * The amount of the pagination dots.
+   *
+   * @var {Number}
+   */
   const dotCount = sliderm.getOption('grouping') ? sliderm.getGroupCount() : sliderm.getItemCount();
 
+  /**
+   * Create the HTML DOM elements for the pagination dots.
+   *
+   * @return {Element}
+   */
   const createDots = (container) => {
     for (let i = 0; i < dotCount; i += 1) {
-      const dot = dom.set('div', selector.paginationItem);
+      const dot = setDom('div', cssPaginationItem);
       if (i === 0) {
         dot.setAttribute('data-active', true);
       }
@@ -27,13 +41,16 @@ export default function pagination(sliderm) {
     return container;
   };
 
+  /**
+   * Initialzie.
+   */
   const init = () => {
     const node = createDots(createContainer());
-    const event = new EventAdapter(node);
+    const event = sliderm.eventAdapter(node);
     sliderm.getRoot().append(node);
 
     event.on('click', (e) => {
-      if (selector.paginationItem === `.${e.target.className}`) {
+      if (cssPaginationItem === e.target.className) {
         const index = Array.prototype.indexOf.call(node.childNodes, e.target);
         const paginationNumber = index + 1;
         sliderm.go('slide', paginationNumber);
@@ -42,7 +59,7 @@ export default function pagination(sliderm) {
 
     sliderm.on('slide.end', () => {
       const position = sliderm.getPosition();
-      const dots = dom.find(sliderm.getRoot(), selector.paginations).children;
+      const dots = findDom(sliderm.getRoot(), `.${cssPaginations}`).children;
       Array.from(dots).forEach((dot, index) => {
         const paginationNumber = index + 1;
         dot.removeAttribute('data-active');
@@ -53,7 +70,6 @@ export default function pagination(sliderm) {
     });
 
     sliderm.on('destory', () => {
-      event.destory();
       node.remove();
     });
   };

@@ -1,8 +1,9 @@
 import config from './core/config';
-import selector from './core/selector';
+import { cssSliderContainer } from './core/selector';
 import { components, modules } from './core/extenstion';
 import EventDispatcher from './core/events/event-dispatcher';
-import dom from './utilities/dom';
+import EventAdapter from './core/events/event-adapter';
+import { getDom, findDom } from './utilities/dom';
 import { error } from './utilities/console';
 
 /**
@@ -10,32 +11,37 @@ import { error } from './utilities/console';
  */
 class Sliderm {
   constructor(el, options) {
-    const root = dom.get(el);
+    const root = getDom(el);
     if (!root) {
       error(`The DOM "${el}" is invalid.`);
       return;
     }
     this.options = Object.assign(config, options);
     this.event = new EventDispatcher();
+    this.domEvents = [];
     this.root = root;
-    this.slider = dom.find(this.root, selector.sliderContainer);
+    this.slider = findDom(this.root, `.${cssSliderContainer}`);
     this.items = [];
     this.itemCount = 0;
     this.position = 1;
     this.liveItems = [];
     this.modules = {};
+    this.emit('initialize');
     this.#updateItems();
     this.#updateGroupCount();
+    this.#installExtensions();
     this.#mountModules();
     this.#initialize();
     this.#updateLiveItems();
     this.slideTo(1);
+    this.emit('initialized');
   }
 
   /**
    * Initialize Sliderm HTML structure.
    */
   #initialize() {
+    this.go('init');
     this.items.forEach((item, index) => {
       this.go('width', item);
       this.go('spacing', item);
@@ -50,14 +56,14 @@ class Sliderm {
    * Mount core-modules and view-components.
    */
   #mountModules() {
-    for (let i = 0; i <= components.length; i += 1) {
-      if (typeof components[i] === 'function' && this.getOption(components[i].name)) {
-        components[i](this);
-      }
-    }
-    for (let i = 0; i <= modules.length; i += 1) {
+    for (let i = 0; i < modules.length; i += 1) {
       if (typeof modules[i] === 'function') {
         this.modules[modules[i].name] = modules[i];
+      }
+    }
+    for (let i = 0; i < components.length; i += 1) {
+      if (typeof components[i] === 'function' && this.getOption(components[i].name)) {
+        components[i](this);
       }
     }
   }
@@ -66,7 +72,7 @@ class Sliderm {
    * Update slide items.
    */
   #updateItems() {
-    this.items = Array.from(dom.find(this.root, selector.sliderContainer).children);
+    this.items = Array.from(findDom(this.root, `.${cssSliderContainer}`).children);
     this.itemCount = this.items.length;
   }
 
@@ -77,7 +83,7 @@ class Sliderm {
     if (!this.itemCount) {
       return;
     }
-    this.liveItems = Array.from(dom.find(this.root, selector.sliderContainer).children);
+    this.liveItems = Array.from(findDom(this.root, `.${cssSliderContainer}`).children);
   }
 
   /**
@@ -86,6 +92,36 @@ class Sliderm {
   #updateGroupCount() {
     const columns = this.getOption('columns');
     this.groupCount = Math.ceil(this.itemCount / columns);
+  }
+
+  /**
+   * Install customized extensions.
+   */
+  #installExtensions() {
+    for (let i = 0; i < this.options.extensions; i += 1) {
+      const extName = this.options.extensions[i].name;
+      if (extName !== '') {
+        const extension = this.options.extensions[i];
+        if (this.options[extName] === undefined) {
+          modules.push(extension);
+        } else {
+          components.push(extension);
+        }
+      }
+    }
+  }
+
+  /**
+   * Create an Event Adapter on a DOM element.
+   * We also collect the references here for destorying them later.
+   *
+   * @param {Element} node DOM element
+   * @return {EventAdapter}
+   */
+  eventAdapter(node) {
+    const event = new EventAdapter(node);
+    this.domEvents.push(event);
+    return event;
   }
 
   /**
@@ -160,7 +196,17 @@ class Sliderm {
    * @return {Mixed}
    */
   getOption(field, defaults = null) {
-    return this.options[field] !== undefined ? this.options[field] : defaults;
+    const option = this.options[field] !== undefined ? this.options[field] : defaults;
+    if (field.includes('.')) {
+      try {
+        const subOptions = field.split('.');
+        return this.options[`_${subOptions[0]}`][subOptions[1]];
+      } catch (err) {
+        error(err);
+        return defaults;
+      }
+    }
+    return option;
   }
 
   /**
@@ -224,6 +270,9 @@ class Sliderm {
   destory() {
     this.event.emit('destory');
     this.event.destory();
+    this.domEvents.forEach((event) => {
+      event.destory();
+    });
   }
 }
 

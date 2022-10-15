@@ -17,10 +17,16 @@ export default function slide(sliderm, slider, ...args) {
   const width = sliderm.getItems()[0].offsetWidth;
   const position = new Position(sliderm);
   const maxPosition = position.maximum();
-  let calculatedPosition = position.calculate(direction, isLoop);
+  let calculatedPosition = position.calculate(direction, false);
   let isReposition = false;
   let distance = 1;
   let axis = 0;
+
+  if (!isLoop) {
+    if (calculatedPosition > maxPosition || calculatedPosition === 0) {
+      return;
+    }
+  }
 
   if (calculatedPosition < 1) {
     isReposition = true;
@@ -46,7 +52,7 @@ export default function slide(sliderm, slider, ...args) {
 
   if (isReposition) {
     queue(() => {
-      calculatedPosition = position.calculate(direction, false);
+      calculatedPosition = position.calculate(direction, isReposition);
 
       if (isGrouping) {
         distance = 0 - calculatedPosition;

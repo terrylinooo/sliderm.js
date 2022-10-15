@@ -1,4 +1,4 @@
-import selector from '../selector';
+import { cssCloneItem } from '../selector';
 
 /**
  * Clone the slide items to the left and right sides.
@@ -12,13 +12,12 @@ export default function clone(sliderm, slider, ...args) {
   const columns = sliderm.getOption('columns');
   const itemCount = sliderm.getItemCount();
   const items = sliderm.getItems();
-  const className = selector.cloneItem.substring(1);
   const sideCount = columns;
   const clonedNode = item.cloneNode(true);
   let insertedClonedNode = null;
   let isInserted = false;
 
-  clonedNode.classList.add(className);
+  clonedNode.classList.add(cssCloneItem);
 
   if (index < sideCount) {
     slider.appendChild(clonedNode);
@@ -28,7 +27,7 @@ export default function clone(sliderm, slider, ...args) {
   if (index >= itemCount - sideCount) {
     if (isInserted) {
       insertedClonedNode = item.cloneNode(true);
-      insertedClonedNode.classList.add(className);
+      insertedClonedNode.classList.add(cssCloneItem);
       // Insert before the first slide item.
       slider.insertBefore(insertedClonedNode, items[0]);
     } else {

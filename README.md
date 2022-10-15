@@ -46,12 +46,11 @@ The HTML makup is required for intializing sliderm.
 
 ```javascript
  const sliderm = new Sliderm('.your-class-name', {
-    previousNext: true,
+    arrow: true,
     pagination: true,
     grouping: false,
     loop: true,
     preview: false,
-    edge: 40,
     columns: 4,
     duration: 1000,
     spacing: 10,

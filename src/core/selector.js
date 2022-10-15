@@ -1,13 +1,12 @@
-export default {
-  sliderWrapper: '.sliderm',
-  sliderContainer: '.sliderm__slides',
-  sliderItem: '.sliderm__slide',
-  paginations: '.sliderm__paginations',
-  paginationItem: '.sliderm__pagination',
-  buttonPrev: '.sliderm__button--previous',
-  buttonNext: '.sliderm__button--next',
-  cloneItem: '.sliderm__slide--clone',
-  activeItem: '.sliderm__slide--active',
-  previousdItem: '.sliderm__slide--previous',
-  nextItem: '.sliderm__slide--next',
-};
+export const cssWrapper = 'sliderm';
+export const cssSliderContainer = 'sliderm__slides';
+export const cssSliderItem = 'sliderm__slide';
+export const cssPaginations = 'sliderm__paginations';
+export const cssPaginationItem = 'sliderm__pagination';
+export const cssButtonPrev = 'sliderm__button--previous';
+export const cssButtonNext = 'sliderm__button--next';
+export const cssCloneItem = 'sliderm__slide--clone';
+export const cssActiveItem = 'sliderm__slide--active';
+export const cssPreviousdItem = 'sliderm__slide--previous';
+export const cssNextItem = 'sliderm__slide--next';
+export const cssSpinner = 'sliderm__spinner';

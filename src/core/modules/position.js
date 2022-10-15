@@ -12,13 +12,13 @@ export default class Position {
   }
 
   /**
-   * Calculate the current pagination number.
+   * Calculate what the pagination number will be.
    *
    * @param {...any} args The arguments.
    * @return {Number} The result pagination number.
    */
   calculate(...args) {
-    const [direction, loop] = args;
+    const [direction, isReposition] = args;
     const columns = this.sliderm.getOption('columns');
     const isGrouping = this.sliderm.getOption('grouping');
     const itemCount = this.sliderm.getItemCount();
@@ -37,12 +37,12 @@ export default class Position {
       result = direction;
     } else if (direction === '>') {
       result = current + 1;
-      if (result > unitCount && !loop) {
+      if (result > unitCount && isReposition) {
         result = 1;
       }
     } else if (direction === '<') {
       result = current - 1;
-      if (result <= 0 && !loop) {
+      if (result <= 0 && isReposition) {
         result = unitCount;
       }
     }

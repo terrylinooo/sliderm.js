@@ -1,0 +1,54 @@
+.#{$sliderm-class} {
+  &__button {
+    &--previous,
+    &--next {
+      position: absolute;
+      top: calc(50% - 16px);
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      width: 32px;
+      height: 32px;
+      background-color: #000;
+      color: #fff;
+      opacity: 0.5;
+      cursor: pointer;
+
+      span {
+        opacity: 1;
+      }
+    }
+
+    &--none {
+      top: 0;
+      height: 100%;
+      background: none !important;
+      text-shadow: 1px 1px 5px #000;
+    }
+
+    &--square {
+      @include border-radius(0);
+    }
+
+    &--circle {
+      @include border-radius(50%);
+    }
+
+    &--previous {
+      left: -16px;
+
+      span {
+        margin-left: -3px;
+      }
+    }
+
+    &--next {
+      right: -16px;
+
+      span {
+        margin-right: -3px;
+      }
+    }
+  }
+}

@@ -6,12 +6,10 @@
  */
 export default function preview(sliderm, slider) {
   const isPreview = sliderm.getOption('preview');
-  const edge = sliderm.getOption('edge');
-
   if (!isPreview) {
     return;
   }
-
+  const edge = sliderm.getOption('preview.edge');
   slider.style.setProperty('padding', `0 ${edge}px`);
 
   sliderm.on('destory', () => {

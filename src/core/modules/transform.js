@@ -6,8 +6,8 @@
  * @param {...any} args The arguments
  */
 export default function transform(sliderm, slider, ...args) {
-  const [xAxis] = args;
-  slider.style.setProperty('transform', `translateX(${xAxis}px)`);
+  const [axis] = args;
+  slider.style.setProperty('transform', `translateX(${axis}px)`);
 
   sliderm.on('destory', () => {
     slider.style.removeProperty('transform');
