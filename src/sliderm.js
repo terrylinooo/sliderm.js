@@ -9,7 +9,7 @@ import { error } from './utilities/console';
 /**
  * Main class.
  */
-class Sliderm {
+ export default class Sliderm {
   constructor(el, options) {
     const root = getDom(el);
     if (!root) {
@@ -24,7 +24,6 @@ class Sliderm {
     this.items = [];
     this.itemCount = 0;
     this.position = 1;
-    this.liveItems = [];
     this.modules = {};
     this.emit('initialize');
     this.#updateItems();
@@ -32,7 +31,6 @@ class Sliderm {
     this.#installExtensions();
     this.#mountModules();
     this.#initialize();
-    this.#updateLiveItems();
     this.slideTo(1);
     this.emit('initialized');
   }
@@ -74,16 +72,6 @@ class Sliderm {
   #updateItems() {
     this.items = Array.from(findDom(this.root, `.${cssSliderContainer}`).children);
     this.itemCount = this.items.length;
-  }
-
-  /**
-   * Update slide items including cloned.
-   */
-  #updateLiveItems() {
-    if (!this.itemCount) {
-      return;
-    }
-    this.liveItems = Array.from(findDom(this.root, `.${cssSliderContainer}`).children);
   }
 
   /**
@@ -275,5 +263,3 @@ class Sliderm {
     });
   }
 }
-
-window.Sliderm = Sliderm;

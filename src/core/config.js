@@ -107,7 +107,7 @@ export default {
      *
      * @type {Number}
      */
-    opacity: 0.8,
+    opacity: 0.5,
 
     /**
      * The size of the arrow icons.

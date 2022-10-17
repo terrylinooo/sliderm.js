@@ -1,4 +1,5 @@
 import { setDom } from '../utilities/dom';
+import { size, bold, shape, color, bgColor, opacity } from './arrow/options';
 import { cssButtonNext, cssButtonPrev } from '../core/selector';
 
 /**
@@ -9,112 +10,51 @@ import { cssButtonNext, cssButtonPrev } from '../core/selector';
  */
 export default function arrow(sliderm) {
   /**
-   * Create a HTML DOM element.
-   *
-   * @param {String} direction The direction.
-   * @return {Element}
-   */
-  const createButton = (direction) => {
-    const name = direction === 'left' ? cssButtonPrev : cssButtonNext;
-    return setDom('div', name);
-  };
-
-  /**
-   * Get the bold style of the arrow buttons.
-   *
-   * @return {String}
-   */
-  const getBoldType = () => {
-    const bold = sliderm.getOption('arrow.bold');
-    const boldTypes = {
-      1: 'thin',
-      2: 'regular',
-      3: 'bold',
-    };
-    return boldTypes[bold] !== undefined ? boldTypes[bold] : boldTypes[2];
-  };
-
-  /**
-   * Get the font size of the arrow buttons.
-   *
-   * @return {Number}
-   */
-  const getFontSize = () => {
-    const size = sliderm.getOption('arrow.size');
-    if (size <= 13) {
-      return 13;
-    }
-    if (size >= 28) {
-      return 28;
-    }
-    return typeof size !== 'number' ? 16 : size;
-  };
-
-  /**
-   * Get the style properties of the arrow buttons.
-   *
-   * @return {Array}
-   */
-  const getProperties = () => [
-    {
-      key: 'color',
-      default: '#ffffff',
-      value: sliderm.getOption('arrow.color'),
-    },
-    {
-      key: 'opacity',
-      default: 0.8,
-      value: sliderm.getOption('arrow.opacity'),
-    },
-    {
-      key: 'background-color',
-      default: '#000000',
-      value: sliderm.getOption('arrow.bgColor'),
-    },
-    {
-      key: 'font-size',
-      default: '16px',
-      value: `${getFontSize()}px`,
-    },
-  ];
-
-  /**
-   * Get the shape of the arrow buttons.
-   *
-   * @return {String}
-   */
-  const getShape = () => {
-    const shape = sliderm.getOption('arrow.shape');
-    if (shape === 'none') {
-      return shape;
-    }
-    if (shape === 'square') {
-      return shape;
-    }
-    return 'circle';
-  };
-
-  /**
    * Initialzie.
    */
   const init = () => {
-    const prevButton = createButton('left');
-    const nextButton = createButton('right');
+    const properties = [
+      size,
+      bold,
+      shape,
+      color,
+      bgColor,
+      opacity,
+    ];
+
+    const prevButton = setDom('div', cssButtonPrev);
+    const nextButton = setDom('div', cssButtonNext);
     const prevEvent = sliderm.eventAdapter(prevButton);
     const nextEvent = sliderm.eventAdapter(nextButton);
+    let prevIcon = null;
+    let nextIcon = null;
 
-    getProperties().forEach((property) => {
-      if (property.default !== property.value) {
-        prevButton.style.setProperty(property.key, property.value);
-        nextButton.style.setProperty(property.key, property.value);
+    for (let i = 0; i < properties.length; i += 1) {
+      let name = properties[i].name;
+      let value = properties[i](sliderm.getOption(`arrow.${name}`));
+
+      if (value !== null) {
+        if (name === 'bold') {
+          prevIcon = setDom('span', `sliderm__icon-left--${value}`);
+          nextIcon = setDom('span', `sliderm__icon-right--${value}`);
+        } else if (name === 'shape') {
+          prevButton.classList.add(`sliderm__button--${value}`);
+          nextButton.classList.add(`sliderm__button--${value}`);
+        } else {
+          if (name === 'bgColor') {
+            name = 'background-color';
+          } else if (name === 'size') {
+            name = 'font-size';
+            value = `${value}px`;
+          }
+          prevButton.style.setProperty(name, value);
+          nextButton.style.setProperty(name, value);
+        }
       }
-    });
+    }
 
-    prevButton.append(setDom('span', `sliderm__icon-left--${getBoldType()}`));
-    prevButton.classList.add(`sliderm__button--${getShape()}`);
-    nextButton.append(setDom('span', `sliderm__icon-right--${getBoldType()}`));
-    nextButton.classList.add(`sliderm__button--${getShape()}`);
-
+    prevButton.append(prevIcon);
+    nextButton.append(nextIcon);
     sliderm.getRoot().append(prevButton);
     sliderm.getRoot().append(nextButton);
 

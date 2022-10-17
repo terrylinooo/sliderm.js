@@ -23,7 +23,9 @@ export default function pagination(sliderm) {
    *
    * @var {Number}
    */
-  const dotCount = sliderm.getOption('grouping') ? sliderm.getGroupCount() : sliderm.getItemCount();
+  const getDotCount = () => {
+    return sliderm.getOption('grouping') ? sliderm.getGroupCount() : sliderm.getItemCount();
+  };
 
   /**
    * Create the HTML DOM elements for the pagination dots.
@@ -31,7 +33,7 @@ export default function pagination(sliderm) {
    * @return {Element}
    */
   const createDots = (container) => {
-    for (let i = 0; i < dotCount; i += 1) {
+    for (let i = 0; i < getDotCount(); i += 1) {
       const dot = setDom('div', cssPaginationItem);
       if (i === 0) {
         dot.setAttribute('data-active', true);

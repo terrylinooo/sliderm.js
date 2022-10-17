@@ -6,7 +6,7 @@ const miniCssExtractPlugin = require('mini-css-extract-plugin');
 const sassParser = require('sass');
 
 const distDir = '../dist';
-const sliderm = ['./src/sliderm.js', './src/assets/scss/index.scss'];
+const sliderm = ['./src/index.js', './src/assets/scss/index.scss'];
 
 module.exports = (env, argv) => ({
   optimization: {
