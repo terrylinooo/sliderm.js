@@ -11,7 +11,7 @@ describe('Unit testing for module width...', () => {
     sliderm = null;
   });
 
-  test('Set the option columns to 1.', () => {
+  test('Set the option columns to 1 and check the width.', () => {
     sliderm = new Sliderm('.sliderm', {
       columns: 1,
     });
@@ -21,7 +21,7 @@ describe('Unit testing for module width...', () => {
     expect(flex).toBe('0 0 100%');
   });
 
-  test('Set the option columns to 2.', () => {
+  test('Set the option columns to 2 and check the width.', () => {
     sliderm = new Sliderm('.sliderm', {
       columns: 2,
     });
@@ -31,7 +31,7 @@ describe('Unit testing for module width...', () => {
     expect(flex).toBe('0 0 50%');
   });
 
-  test('Set the option columns to 3.', () => {
+  test('Set the option columns to 3 and check the width.', () => {
     sliderm = new Sliderm('.sliderm', {
       columns: 3,
     });
@@ -41,7 +41,7 @@ describe('Unit testing for module width...', () => {
     expect(flex).toBe('0 0 33.33%');
   });
 
-  test('Set the option columns to 4.', () => {
+  test('Set the option columns to 4 and check the width.', () => {
     sliderm = new Sliderm('.sliderm', {
       columns: 4,
     });
@@ -49,5 +49,21 @@ describe('Unit testing for module width...', () => {
     const item = document.querySelector(`.${cssSliderItem}`);
     const flex = item.style.getPropertyValue('flex');
     expect(flex).toBe('0 0 25%');
+  });
+
+  test('Test to destory, the width should be empty.', () => {
+    sliderm = new Sliderm('.sliderm', {
+      columns: 4,
+    });
+
+    const item = document.querySelector(`.${cssSliderItem}`);
+    const flex = item.style.getPropertyValue('flex');
+    expect(flex).toBe('0 0 25%');
+
+    sliderm.destory();
+
+    const item2 = document.querySelector(`.${cssSliderItem}`);
+    const flex2 = item2.style.getPropertyValue('flex');
+    expect(flex2).toBe('');
   });
 });

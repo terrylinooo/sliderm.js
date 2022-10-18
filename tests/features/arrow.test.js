@@ -17,7 +17,7 @@ describe('Unit testing for component arrow...', () => {
     prevButton = null;
   });
 
-  test('Turn the component arrow off.', () => {
+  test('Turn the component arrow off, the DOM should not exist.', () => {
     sliderm = new Sliderm('.sliderm', {
       arrow: false,
     });
@@ -28,7 +28,7 @@ describe('Unit testing for component arrow...', () => {
     expect(prevButton).toBeNull();
   });
 
-  test('Turn the component arrow on.', () => {
+  test('Turn the component arrow on, the DOM should exist.', () => {
     sliderm = new Sliderm('.sliderm', {
       arrow: true,
     });
@@ -39,7 +39,7 @@ describe('Unit testing for component arrow...', () => {
     expect(prevButton).toBeInstanceOf(HTMLDivElement);
   });
 
-  test('Click the next arrow button', () => {
+  test('Click the next arrow button and check the position number.', () => {
     sliderm = new Sliderm('.sliderm', {
       arrow: true,
     });
@@ -56,7 +56,7 @@ describe('Unit testing for component arrow...', () => {
     expect(sliderm.go).toHaveBeenCalled();
   });
 
-  test('Click the previous arrow button', () => {
+  test('Click the previous arrow button and check the position number.', () => {
     sliderm = new Sliderm('.sliderm', {
       arrow: true,
     });

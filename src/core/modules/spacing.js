@@ -8,7 +8,7 @@
 export default function spacing(sliderm, slider, ...args) {
   const [item] = args;
   const padding = Math.floor(sliderm.getOption('spacing') / 2);
-  item.style.setProperty('padding', `0 ${padding}px`);
+  item.style.setProperty('padding', `0px ${padding}px`);
 
   sliderm.on('destory', () => {
     item.style.removeProperty('padding');
