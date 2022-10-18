@@ -8,7 +8,7 @@
 export default function width(sliderm, slider, ...args) {
   const [item] = args;
   const per = sliderm.getOption('columns');
-  const itemWidth = (1 / per) * 100;
+  const itemWidth = parseFloat(((1 / per) * 100).toFixed(2));
   item.style.setProperty('flex', `0 0 ${itemWidth}%`);
 
   sliderm.on('destory', () => {

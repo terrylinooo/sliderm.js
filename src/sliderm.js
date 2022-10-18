@@ -122,15 +122,6 @@ import { error } from './utilities/console';
   }
 
   /**
-   * The slider container.
-   *
-   * @return {Element}
-   */
-  getContainer() {
-    return this.sliderContainer;
-  }
-
-  /**
    * Get total of slides.
    *
    * @return {Number}

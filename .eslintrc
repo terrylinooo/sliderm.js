@@ -18,7 +18,8 @@
     "react",
     "jsx-a11y",
     "import",
-    "prettier"
+    "prettier",
+    "jest",
   ],
   "rules": {
     "prettier/prettier": "error",
