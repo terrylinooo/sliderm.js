@@ -9,7 +9,7 @@ import { error } from './utilities/console';
 /**
  * Main class.
  */
- export default class Sliderm {
+export default class Sliderm {
   constructor(el, options) {
     const root = getDom(el);
     if (!root) {
@@ -25,13 +25,16 @@ import { error } from './utilities/console';
     this.itemCount = 0;
     this.position = 1;
     this.modules = {};
+
     this.emit('initialize');
+
     this.#updateItems();
     this.#updateGroupCount();
     this.#installExtensions();
     this.#mountModules();
     this.#initialize();
     this.slideTo(1);
+
     this.emit('initialized');
   }
 
@@ -41,7 +44,7 @@ import { error } from './utilities/console';
   #initialize() {
     this.go('init');
     this.items.forEach((item, index) => {
-      this.go('width', item);
+      this.go('columns', item);
       this.go('spacing', item);
       this.go('grouping', item, index);
       this.go('clone', item, index);

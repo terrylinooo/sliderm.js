@@ -14,9 +14,9 @@ export default function grouping(sliderm, slider, ...args) {
     const columns = sliderm.getOption('columns');
     const groupNumber = Math.ceil((index + 1) / columns);
     item.setAttribute('data-order', groupNumber);
-    return;
+  } else {
+    item.setAttribute('data-order', orderNumber);
   }
-  item.setAttribute('data-order', orderNumber);
 
   sliderm.on('destory', () => {
     item.removeAttribute('data-order');

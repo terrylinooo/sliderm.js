@@ -2,6 +2,7 @@
 
 Sliderm is a slider and carousel JavaScript library that has only packed size is less than 16 KB.
 
+This library is still under construction, please don't use it until the first release.
 
 ## Getting started
 

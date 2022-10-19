@@ -3,7 +3,6 @@ import Sliderm from '../../src/sliderm';
 import { cssSliderItem } from '../../src/core/selector';
 
 describe('Unit testing for module spacing...', () => {
-  // eslint-disable-next-line no-unused-vars
   let sliderm = null;
 
   beforeEach(() => {

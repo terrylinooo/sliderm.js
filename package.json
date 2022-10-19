@@ -7,7 +7,8 @@
   "scripts": {
     "build": "webpack --mode production",
     "watch": "webpack --watch --mode development",
-    "test": "jest tests/**/*.test.js --verbose false"
+    "test": "jest tests/(.)*/*.test.js --verbose false",
+    "coverage": "npm test -- --coverage"
   },
   "jest": {
     "testEnvironment": "jsdom"

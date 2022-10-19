@@ -2,8 +2,7 @@ import html from '../fixtures/html';
 import Sliderm from '../../src/sliderm';
 import { cssSliderItem } from '../../src/core/selector';
 
-describe('Unit testing for module width...', () => {
-  // eslint-disable-next-line no-unused-vars
+describe('Unit testing for module columns...', () => {
   let sliderm = null;
 
   beforeEach(() => {
