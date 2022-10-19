@@ -1,6 +1,6 @@
 # Sliderm
 
-![Test](https://github.com/terrylinooo/sliderm.js/actions/workflows/node.yml/badge.svg) [![codecov](https://codecov.io/gh/terrylinooo/sliderm.js/branch/master/graph/badge.svg?token=poJlzJqTlq)](https://codecov.io/gh/terrylinooo/sliderm.js)
+![Test](https://github.com/terrylinooo/sliderm.js/actions/workflows/testing.yml/badge.svg) [![codecov](https://codecov.io/gh/terrylinooo/sliderm.js/branch/master/graph/badge.svg?token=poJlzJqTlq)](https://codecov.io/gh/terrylinooo/sliderm.js)
 
 Sliderm is a slider and carousel JavaScript library that has only packed size is less than 16 KB.
 
