@@ -13,14 +13,7 @@ export default function arrow(sliderm) {
    * Initialzie.
    */
   const init = () => {
-    const properties = [
-      size,
-      bold,
-      shape,
-      color,
-      bgColor,
-      opacity,
-    ];
+    const properties = [size, bold, shape, color, bgColor, opacity];
 
     const prevButton = setDom('div', cssButtonPrev);
     const nextButton = setDom('div', cssButtonNext);
@@ -30,7 +23,7 @@ export default function arrow(sliderm) {
     let nextIcon = null;
 
     for (let i = 0; i < properties.length; i += 1) {
-      let name = properties[i].name;
+      let { name } = properties[i];
       let value = properties[i](sliderm.getOption(`arrow.${name}`));
 
       if (value !== null) {
@@ -59,11 +52,11 @@ export default function arrow(sliderm) {
     sliderm.getRoot().append(nextButton);
 
     prevEvent.on('click', () => {
-      sliderm.go('slide', '<');
+      sliderm.slideTo('<');
     });
 
     nextEvent.on('click', () => {
-      sliderm.go('slide', '>');
+      sliderm.slideTo('>');
     });
 
     sliderm.on('destory', () => {

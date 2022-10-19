@@ -68,6 +68,7 @@ export default {
 
   /**
    * Align the slide items vertically.
+   * Expected value: top | center | bottom
    *
    * @type {String}
    */

@@ -55,7 +55,7 @@ export default function pagination(sliderm) {
       if (cssPaginationItem === e.target.className) {
         const index = Array.prototype.indexOf.call(node.childNodes, e.target);
         const paginationNumber = index + 1;
-        sliderm.go('slide', paginationNumber);
+        sliderm.slideTo(paginationNumber);
       }
     });
 

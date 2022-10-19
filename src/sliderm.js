@@ -26,6 +26,7 @@ export default class Sliderm {
     this.position = 1;
     this.modules = {};
 
+    // Event: initialize
     this.emit('initialize');
 
     this.#updateItems();
@@ -35,6 +36,7 @@ export default class Sliderm {
     this.#initialize();
     this.slideTo(1);
 
+    // Event: initialized
     this.emit('initialized');
   }
 
@@ -194,7 +196,9 @@ export default class Sliderm {
   /**
    * Slide to specific pagination.
    *
-   * @param {Number} pagination The pagination number.
+   * @param {Number|String} pagination
+   * Number for the pagination number. Expected value: [0-9]+
+   * String for the direction. Expected value: > | <
    */
   slideTo(pagination) {
     this.go('slide', pagination);
@@ -229,10 +233,10 @@ export default class Sliderm {
    * Remove an event listener.
    *
    * @param {String} name The event name of each event listener.
-   * @param {Number} priority The priority of each event listener.
+   * @param {Function} handler Used to identify the memory position to remove it.
    */
-  off(name, priority) {
-    this.event.off(name, priority);
+  off(name, handler) {
+    this.event.off(name, handler);
   }
 
   /**
