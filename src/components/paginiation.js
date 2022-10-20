@@ -24,7 +24,8 @@ export default function pagination(sliderm) {
    * @var {Number}
    */
   const getDotCount = () => {
-    return sliderm.getOption('grouping') ? sliderm.getGroupCount() : sliderm.getItemCount();
+    const count = sliderm.getOption('grouping') ? sliderm.getGroupCount() : sliderm.getItemCount();
+    return count;
   };
 
   /**

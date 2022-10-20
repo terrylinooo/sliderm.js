@@ -7,3 +7,5 @@ export function error(msg) {
   // eslint-disable-next-line no-console
   console.error(`[Sliderm] ${msg}`);
 }
+
+export default error;
