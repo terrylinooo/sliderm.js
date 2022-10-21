@@ -9,12 +9,8 @@
  * @return {Boolean}
  */
 export function hasDom(selector) {
-  try {
-    const foundEl = document.querySelector(selector);
-    return foundEl !== null;
-  } catch (error) {
-    return false;
-  }
+  const foundEl = document.querySelector(selector);
+  return foundEl !== null;
 }
 
 /**
@@ -51,5 +47,9 @@ export function setDom(tag, name) {
  * @return {Element|Null}
  */
 export function findDom(parentDom, selector) {
-  return parentDom.querySelector(selector);
+  try {
+    return parentDom.querySelector(selector);
+  } catch (err) {
+    return null;
+  }
 }

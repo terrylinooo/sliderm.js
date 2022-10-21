@@ -1,5 +1,6 @@
 export const cssWrapper = 'sliderm';
 export const cssSliderContainer = 'sliderm__slides';
+export const cssSliderWrapper = 'sliderm__slider';
 export const cssSliderItem = 'sliderm__slide';
 export const cssPaginations = 'sliderm__paginations';
 export const cssPaginationItem = 'sliderm__pagination';

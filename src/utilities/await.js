@@ -9,13 +9,4 @@ export function queue(callback, duration = 0) {
   }, duration);
 }
 
-/**
- * The async function wrapper.
- *
- * @param {Function} callback The callback function.
- * @param {Mixed}
- */
-export async function wait(callback) {
-  const result = await callback();
-  return result;
-}
+export default queue;
