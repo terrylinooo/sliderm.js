@@ -1,4 +1,3 @@
-import Position from './position';
 import { queue } from '../../utilities/await';
 
 /**
@@ -11,13 +10,15 @@ import { queue } from '../../utilities/await';
 export default function slide(sliderm, slider, ...args) {
   const [direction, command] = args;
   const isGrouping = sliderm.getOption('grouping');
+  const isPreview = sliderm.getOption('preview');
   const duration = sliderm.getOption('duration');
   const columns = sliderm.getOption('columns');
   const isLoop = sliderm.getOption('loop');
   const width = sliderm.getItems()[0].offsetWidth;
-  const position = new Position(sliderm);
-  const maxPosition = position.maximum();
-  let calculatedPosition = position.calculate(direction, false);
+  const page = sliderm.getPage();
+  const isClone = isLoop || isPreview;
+  const maxPosition = page.maximum();
+  let calculatedPosition = page.calculate(direction, false);
   let isReposition = false;
   let distance = 1;
   let axis = 0;
@@ -35,10 +36,10 @@ export default function slide(sliderm, slider, ...args) {
   }
 
   if (isGrouping) {
-    distance = 0 - calculatedPosition;
+    distance = 0 - (isClone ? 0 : -1) - calculatedPosition;
     axis = width * distance * columns;
   } else {
-    distance = 1 - columns - calculatedPosition;
+    distance = 1 - (isClone ? columns : 0) - calculatedPosition;
     axis = width * distance;
   }
 
@@ -52,7 +53,7 @@ export default function slide(sliderm, slider, ...args) {
 
   if (isReposition) {
     queue(() => {
-      calculatedPosition = position.calculate(direction, isReposition);
+      calculatedPosition = page.calculate(direction, isReposition);
 
       if (isGrouping) {
         distance = 0 - calculatedPosition;

@@ -30,12 +30,12 @@ export function getDom(selector) {
  * Get an DOM element.
  *
  * @param {String} tag The HTML tag name.
- * @param {String} name The name of a CSS selector.
+ * @param {...any} name The name of a CSS selector.
  * @return {Element}
  */
-export function setDom(tag, name) {
+export function setDom(tag, ...name) {
   const node = document.createElement(tag);
-  node.className = name;
+  node.classList.add(...name);
   return node;
 }
 

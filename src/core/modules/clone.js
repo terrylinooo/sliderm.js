@@ -10,6 +10,15 @@ import { cssCloneItem } from '../selector';
 export default function clone(sliderm, slider, ...args) {
   const [item, index] = args;
   const columns = sliderm.getOption('columns');
+  const preview = sliderm.getOption('preview');
+  const loop = sliderm.getOption('loop');
+
+  // It's necessary to create cloned items if the options
+  // loop and preview are disabled.
+  if (!preview && !loop) {
+    return;
+  }
+
   const itemCount = sliderm.getItemCount();
   const items = sliderm.getItems();
   const sideCount = columns;

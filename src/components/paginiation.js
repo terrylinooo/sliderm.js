@@ -19,22 +19,15 @@ export default function pagination(sliderm) {
   };
 
   /**
-   * The amount of the pagination dots.
-   *
-   * @var {Number}
-   */
-  const getDotCount = () => {
-    const count = sliderm.getOption('grouping') ? sliderm.getGroupCount() : sliderm.getItemCount();
-    return count;
-  };
-
-  /**
    * Create the HTML DOM elements for the pagination dots.
+   *
+   * @param {Element} container The container's DOM.
+   * @param {Number} max The maximum page number.
    *
    * @return {Element}
    */
-  const createDots = (container) => {
-    for (let i = 0; i < getDotCount(); i += 1) {
+  const createDots = (container, max) => {
+    for (let i = 0; i < max; i += 1) {
       const dot = setDom('div', cssPaginationItem);
       if (i === 0) {
         dot.setAttribute('data-active', true);
@@ -48,7 +41,8 @@ export default function pagination(sliderm) {
    * Initialzie.
    */
   const init = () => {
-    const node = createDots(createContainer());
+    const max = sliderm.getPage().maximum();
+    const node = createDots(createContainer(), max);
     const event = sliderm.eventAdapter(node);
     sliderm.getRoot().append(node);
 

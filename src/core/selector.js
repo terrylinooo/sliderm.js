@@ -7,6 +7,7 @@ export const cssPaginationItem = 'sliderm__pagination';
 export const cssButtonPrev = 'sliderm__button--previous';
 export const cssButtonNext = 'sliderm__button--next';
 export const cssCloneItem = 'sliderm__slide--clone';
+export const cssEmptyItem = 'sliderm__slide--empty';
 export const cssActiveItem = 'sliderm__slide--active';
 export const cssPreviousdItem = 'sliderm__slide--previous';
 export const cssNextItem = 'sliderm__slide--next';

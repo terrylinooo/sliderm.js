@@ -1,10 +1,11 @@
-import config from './core/config';
-import { cssSliderContainer } from './core/selector';
 import { components, modules } from './core/extenstion';
+import { cssSliderContainer } from './core/selector';
+import { getDom, findDom } from './utilities/dom';
 import EventDispatcher from './core/events/event-dispatcher';
 import EventAdapter from './core/events/event-adapter';
-import { getDom, findDom } from './utilities/dom';
 import { error } from './utilities/console';
+import config from './core/config';
+import Page from './core/modules/page';
 
 /**
  * Main class.
@@ -18,26 +19,29 @@ export default class Sliderm {
     }
     this.options = Object.assign(config, options);
     this.event = new EventDispatcher();
-    this.domEvents = [];
+    this.page = new Page(this);
     this.root = root;
-    this.slider = findDom(this.root, `.${cssSliderContainer}`);
-    this.items = [];
+    this.initialized = false;
+    this.domEvents = [];
     this.itemCount = 0;
     this.position = 1;
     this.modules = {};
+    this.slider = findDom(this.root, `.${cssSliderContainer}`);
+    this.items = [];
 
     // Event: initialize
     this.emit('initialize');
 
     this.#updateItems();
     this.#updateGroupCount();
-    this.#installExtensions();
     this.#mountModules();
     this.#initialize();
     this.slideTo(1);
 
     // Event: initialized
     this.emit('initialized');
+
+    this.#installExtensions();
   }
 
   /**
@@ -45,14 +49,16 @@ export default class Sliderm {
    */
   #initialize() {
     this.go('init');
+    this.go('loop');
+    this.go('align');
+    this.go('preview');
     this.items.forEach((item, index) => {
       this.go('columns', item);
       this.go('spacing', item);
       this.go('grouping', item, index);
       this.go('clone', item, index);
     });
-    this.go('align');
-    this.go('preview');
+    this.initialized = true;
   }
 
   /**
@@ -118,6 +124,15 @@ export default class Sliderm {
   }
 
   /**
+   * Get the Page instance.
+   *
+   * @return {Page}
+   */
+  getPage() {
+    return this.page;
+  }
+
+  /**
    * The root DOM of the slider.
    *
    * @return {Element}
@@ -170,6 +185,21 @@ export default class Sliderm {
    */
   updatePosition(position) {
     this.position = position;
+  }
+
+  /**
+   * Update current items.
+   * This method can not be called after initializing.
+   *
+   * @return {Boolean}
+   */
+  updateCurrentItems() {
+    if (this.initialized) {
+      return false;
+    }
+    this.#updateItems();
+    this.#updateGroupCount();
+    return true;
   }
 
   /**

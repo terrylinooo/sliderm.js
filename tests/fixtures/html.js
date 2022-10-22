@@ -1,16 +1,18 @@
-export default function html() {
+const DEFAULT = 8; // Do not modify it.
+const slides = (count) => {
+  const items = [];
+  for (let i = 1; i <= count; i += 1) {
+    items.push(`<div class="sliderm__slide">${i}</div>`);
+  }
+  return items.join('');
+};
+
+export default function html(columns = DEFAULT) {
   return `
     <div class="sliderm">
       <div class="sliderm__slider">
           <div class="sliderm__slides">
-              <div class="sliderm__slide">1</div>
-              <div class="sliderm__slide">2</div>
-              <div class="sliderm__slide">3</div>
-              <div class="sliderm__slide">4</div>
-              <div class="sliderm__slide">5</div>
-              <div class="sliderm__slide">6</div>
-              <div class="sliderm__slide">7</div>
-              <div class="sliderm__slide">8</div>
+              ${slides(columns)}
           </div>
       </div>
     </div>

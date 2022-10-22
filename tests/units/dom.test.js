@@ -25,6 +25,9 @@ describe('Unit testing for the console utility...', () => {
     const dom = setDom('div', 'hello-word');
     expect(dom).toBeInstanceOf(HTMLDivElement);
     expect(dom.classList.contains('hello-word')).toBe(true);
+
+    const dom2 = setDom('div', 'hello-word', 'taiwan');
+    expect(dom2.classList.contains('taiwan')).toBe(true);
   });
 
   test('Check the function - findDom', () => {

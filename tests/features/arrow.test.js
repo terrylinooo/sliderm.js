@@ -76,4 +76,26 @@ describe('Unit testing for component arrow...', () => {
 
     jest.runAllTimers();
   });
+
+  test('Apply the settings for component arrow.', () => {
+    sliderm = new Sliderm('.sliderm', {
+      arrow: true,
+      _arrow: {
+        color: '#eeeeff',
+        bgColor: '#222222',
+        opacity: 0.6,
+        size: 18,
+      },
+    });
+
+    prevButton = document.querySelector(`.${cssButtonPrev}`);
+    const color = prevButton.style.getPropertyValue('color');
+    const bgColor = prevButton.style.getPropertyValue('background-color');
+    const opacity = prevButton.style.getPropertyValue('opacity');
+    const size = prevButton.style.getPropertyValue('font-size');
+    expect(color).toBe('rgb(238, 238, 255)');
+    expect(bgColor).toBe('rgb(34, 34, 34)');
+    expect(opacity).toBe('0.6');
+    expect(size).toBe('18px');
+  });
 });

@@ -1,7 +1,7 @@
 /**
- * This is not a pre-loading module. It is used in module slide.js
+ * Calculate the current page number and the maximum page number.
  */
-export default class Position {
+export default class Page {
   /**
    * Constructor.
    *
@@ -50,13 +50,25 @@ export default class Position {
   }
 
   /**
-   * Get pagination numbers.
+   * Calculate the maximum page number.
    *
    * @return {Number}
    */
   maximum() {
-    return this.sliderm.getOption('grouping')
-      ? this.sliderm.getGroupCount()
-      : this.sliderm.getItemCount();
+    const isLoop = this.sliderm.getOption('loop');
+    const isPreview = this.sliderm.getOption('preview');
+    const isGrouping = this.sliderm.getOption('grouping');
+    const columns = this.sliderm.getOption('columns');
+    const isClone = isLoop || isPreview;
+
+    if (isGrouping) {
+      return this.sliderm.getGroupCount();
+    }
+
+    if (isClone) {
+      return this.sliderm.getItemCount();
+    }
+
+    return this.sliderm.getItemCount() - columns + 1;
   }
 }

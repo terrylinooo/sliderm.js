@@ -1,27 +1,30 @@
 import pagination from '../components/paginiation';
-import arrow from '../components/arrow';
 import spinner from '../components/spinner';
-import move from './modules/slide';
+import arrow from '../components/arrow';
 import transition from './modules/transition';
 import trasnform from './modules/transform';
-import columns from './modules/columns';
-import spacing from './modules/spacing';
 import grouping from './modules/grouping';
+import columns from './modules/columns';
+import preview from './modules/preview';
+import spacing from './modules/spacing';
 import clone from './modules/clone';
 import align from './modules/align';
-import preview from './modules/preview';
+import move from './modules/slide';
+import loop from './modules/loop';
 import init from './modules/init';
 
 export const modules = [
-  move,
   transition,
   trasnform,
-  columns,
-  spacing,
   grouping,
-  clone,
-  align,
+  columns,
   preview,
+  spacing,
+  align,
+  clone,
+  move,
+  loop,
   init,
 ];
-export const components = [pagination, arrow, spinner];
+
+export const components = [pagination, spinner, arrow];
