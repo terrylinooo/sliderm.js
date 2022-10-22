@@ -7,6 +7,7 @@ import { cssButtonNext, cssButtonPrev } from '../core/selector';
  * Create the "next button" and "previous button" on both sides of the slider.
  *
  * @param {Object} sliderm The Sliderm instance.
+ * @return {Object}
  */
 export default function arrow(sliderm) {
   /**
@@ -17,8 +18,8 @@ export default function arrow(sliderm) {
 
     const prevButton = setDom('div', cssButtonPrev);
     const nextButton = setDom('div', cssButtonNext);
-    const prevEvent = sliderm.eventAdapter(prevButton);
-    const nextEvent = sliderm.eventAdapter(nextButton);
+    const prevEvent = sliderm.adaptEvent(prevButton);
+    const nextEvent = sliderm.adaptEvent(nextButton);
     let prevIcon = null;
     let nextIcon = null;
 

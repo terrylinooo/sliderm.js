@@ -2,7 +2,7 @@
  * Implement the observer pattern to give abilities for modules
  * for connecting each other.
  */
-export default class eventDispatcher {
+export default class EventDispatcher {
   constructor() {
     this.events = {};
   }
@@ -24,7 +24,7 @@ export default class eventDispatcher {
    * Remove an event listener.
    *
    * @param {String} name The event name of each event listener.
-   * @param {Function} handler Used to identify the memory position to remove it.
+   * @param {Function} handler Named function used to indicate the memory reference to remove it.
    */
   off(name, handler) {
     if (handler !== undefined) {

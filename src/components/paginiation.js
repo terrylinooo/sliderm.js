@@ -6,6 +6,7 @@ import { cssPaginations, cssPaginationItem } from '../core/selector';
  * Create a pagination on the bottom side of the slider.
  *
  * @param {Object} sliderm The Sliderm instance.
+ * @return {Object}
  */
 export default function pagination(sliderm) {
   /**
@@ -43,7 +44,7 @@ export default function pagination(sliderm) {
   const init = () => {
     const max = sliderm.getPage().maximum();
     const node = createDots(createContainer(), max);
-    const event = sliderm.eventAdapter(node);
+    const event = sliderm.adaptEvent(node);
     sliderm.getRoot().append(node);
 
     event.on('click', (e) => {

@@ -34,14 +34,13 @@ export default class Sliderm {
 
     this.#updateItems();
     this.#updateGroupCount();
-    this.#mountModules();
+    this.#beforeMountExtensions();
+    this.#mountExtensions();
     this.#initialize();
     this.slideTo(1);
 
     // Event: initialized
     this.emit('initialized');
-
-    this.#installExtensions();
   }
 
   /**
@@ -64,7 +63,7 @@ export default class Sliderm {
   /**
    * Mount core-modules and view-components.
    */
-  #mountModules() {
+  #mountExtensions() {
     for (let i = 0; i < modules.length; i += 1) {
       if (typeof modules[i] === 'function') {
         this.modules[modules[i].name] = modules[i];
@@ -96,8 +95,8 @@ export default class Sliderm {
   /**
    * Install customized extensions.
    */
-  #installExtensions() {
-    for (let i = 0; i < this.options.extensions; i += 1) {
+  #beforeMountExtensions() {
+    for (let i = 0; i < this.options.extensions.length; i += 1) {
       const extName = this.options.extensions[i].name;
       if (extName !== '') {
         const extension = this.options.extensions[i];
@@ -117,7 +116,7 @@ export default class Sliderm {
    * @param {Element} node DOM element
    * @return {EventAdapter}
    */
-  eventAdapter(node) {
+  adaptEvent(node) {
     const event = new EventAdapter(node);
     this.domEvents.push(event);
     return event;

@@ -18,7 +18,7 @@ describe('Unit testing for the await utility...', () => {
     expect(mockFunction.test).toHaveBeenCalled();
   });
 
-  test('Check the function - Queue for default.', () => {
+  test('Check the function - queue, default.', () => {
     const mockFunction = {
       test: () => true,
     };

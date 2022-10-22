@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import html from '../fixtures/html';
+import demoComponent from '../fixtures/demo-component';
+import demoModule from '../fixtures/demo-module';
 import Sliderm from '../../src/sliderm';
-import { queue } from '../../src/utilities/await';
 
 describe('Unit testing for module slide...', () => {
   let sliderm = null;
@@ -17,26 +18,40 @@ describe('Unit testing for module slide...', () => {
     expect(console.error.mock.calls[0][0]).toBe('[Sliderm] The DOM ".hello" is invalid.');
   });
 
-  test('Test to use the method updateCurrentItems, should return false after initializing.', () => {
+  test('Test to use the method - updateCurrentItems, should return false after initializing.', () => {
     sliderm = new Sliderm('.sliderm');
     expect(sliderm.updateCurrentItems()).toBe(false);
   });
 
-  test('Test to use the method getOption, should return default if the option does not exist.', () => {
+  test('Test to use the method - getOption, should return default if the option does not exist.', () => {
     sliderm = new Sliderm('.sliderm');
     expect(sliderm.getOption('option_not_exist', 'hello')).toBe('hello');
     expect(sliderm.getOption('option_not_exist.option', 'hello')).toBe('hello');
   });
 
-  test('Test to use the method go.', () => {
+  test('Test to use the method - go.', () => {
     sliderm = new Sliderm('.sliderm');
     console.error = jest.fn();
     sliderm.go('module_not_exist');
     expect(console.error.mock.calls[0][0]).toBe('[Sliderm] Invalid module name: module_not_exist');
   });
 
-  test('Test to use the method off.', () => {
+  test('Test to use the method - off', () => {
     sliderm = new Sliderm('.sliderm');
-   
+    const { events } = sliderm.event;
+    expect(typeof events.initialized).toBe('object');
+    sliderm.off('initialized');
+    expect(typeof events.initialized).toBe('undefined');
+  });
+
+  test('Test to use the method - beforeMountExtensions', () => {
+    console.log = jest.fn();
+
+    sliderm = new Sliderm('.sliderm', {
+      demoComponent: true,
+      extensions: [demoComponent, demoModule],
+    });
+
+    expect(console.log.mock.calls[0][0]).toBe('demoModule is executed.');
   });
 });

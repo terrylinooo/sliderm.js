@@ -6,6 +6,7 @@ import { cssSpinner } from '../core/selector';
  * Create a loading effect of initializing stage.
  *
  * @param {Object} sliderm The Sliderm instance.
+ * @return {Object}
  */
 export default function spinner(sliderm) {
   /**
