@@ -2,6 +2,7 @@ import pagination from '../components/paginiation';
 import spinner from '../components/spinner';
 import arrow from '../components/arrow';
 import transition from './modules/transition';
+import breakpoint from './modules/breakpoint';
 import trasnform from './modules/transform';
 import grouping from './modules/grouping';
 import columns from './modules/columns';
@@ -14,6 +15,7 @@ import loop from './modules/loop';
 import init from './modules/init';
 
 export const modules = [
+  breakpoint,
   transition,
   trasnform,
   grouping,

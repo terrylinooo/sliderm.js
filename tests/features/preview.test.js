@@ -10,7 +10,7 @@ describe('Unit testing for module preview...', () => {
     sliderm = null;
   });
 
-  test('Set the option preview to be true and check the align-items value.', () => {
+  test('Set the option preview to be true and check the padding value.', () => {
     sliderm = new Sliderm('.sliderm', {
       preview: true,
       _preview: {

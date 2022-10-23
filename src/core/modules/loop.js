@@ -21,7 +21,7 @@ export default function loop(sliderm, slider) {
   const count = columns - (itemCount % columns);
   const nodes = [];
 
-  if (count === columns) {
+  if (count === columns || columns === 1) {
     return;
   }
 

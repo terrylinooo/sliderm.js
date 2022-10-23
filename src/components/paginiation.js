@@ -9,25 +9,44 @@ import { cssPaginations, cssPaginationItem } from '../core/selector';
  * @return {Object}
  */
 export default function pagination(sliderm) {
+  let max;
+  let node;
+  let event;
+
   /**
-   * Create a HTML DOM element for the pagination container.
+   * The event handler for clicking the pagination button.
    *
-   * @return {Element}
+   * @param {Object} e PointerEvent
    */
-  const createContainer = () => {
-    const container = setDom('div', cssPaginations);
-    return container;
+  const click = (e) => {
+    if (cssPaginationItem === e.target.className) {
+      const index = Array.prototype.indexOf.call(node.childNodes, e.target);
+      const paginationNumber = index + 1;
+      sliderm.slideTo(paginationNumber);
+    }
   };
 
   /**
-   * Create the HTML DOM elements for the pagination dots.
-   *
-   * @param {Element} container The container's DOM.
-   * @param {Number} max The maximum page number.
-   *
-   * @return {Element}
+   * The event handler for marking up the active pagination button.
    */
-  const createDots = (container, max) => {
+  const mark = () => {
+    const position = sliderm.getPosition();
+    const dots = findDom(sliderm.getRoot(), `.${cssPaginations}`).children;
+    Array.from(dots).forEach((dot, index) => {
+      const paginationNumber = index + 1;
+      dot.removeAttribute('data-active');
+      if (paginationNumber === position) {
+        dot.setAttribute('data-active', true);
+      }
+    });
+  };
+
+  /**
+   * Inject the pagination to the DOM.
+   */
+  const render = () => {
+    const container = setDom('div', cssPaginations);
+    max = sliderm.getPage().maximum();
     for (let i = 0; i < max; i += 1) {
       const dot = setDom('div', cssPaginationItem);
       if (i === 0) {
@@ -35,42 +54,42 @@ export default function pagination(sliderm) {
       }
       container.append(dot);
     }
-    return container;
+    node = container;
+    event = sliderm.adaptEvent(node);
+    sliderm.getRoot().append(node);
   };
 
   /**
-   * Initialzie.
+   * Remove all events and the DOM we injected.
+   */
+  const destory = () => {
+    event.off('click', click);
+    sliderm.off('slide.end', mark);
+    node.remove();
+  };
+
+  /**
+   * Listen up the events.
+   */
+  const listen = () => {
+    event.on('click', click);
+    sliderm.on('slide.end', mark);
+  };
+
+  /**
+   * Initialize.
    */
   const init = () => {
-    const max = sliderm.getPage().maximum();
-    const node = createDots(createContainer(), max);
-    const event = sliderm.adaptEvent(node);
-    sliderm.getRoot().append(node);
-
-    event.on('click', (e) => {
-      if (cssPaginationItem === e.target.className) {
-        const index = Array.prototype.indexOf.call(node.childNodes, e.target);
-        const paginationNumber = index + 1;
-        sliderm.slideTo(paginationNumber);
-      }
-    });
-
-    sliderm.on('slide.end', () => {
-      const position = sliderm.getPosition();
-      const dots = findDom(sliderm.getRoot(), `.${cssPaginations}`).children;
-      Array.from(dots).forEach((dot, index) => {
-        const paginationNumber = index + 1;
-        dot.removeAttribute('data-active');
-        if (paginationNumber === position) {
-          dot.setAttribute('data-active', true);
-        }
-      });
-    });
-
-    sliderm.on('destory', () => {
-      node.remove();
-    });
+    render();
+    listen();
   };
+
+  sliderm.on('destory', destory);
+
+  sliderm.on('breakpoint.changed', () => {
+    destory();
+    init();
+  });
 
   init();
 }

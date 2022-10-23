@@ -28,7 +28,13 @@ export default class Sliderm {
     this.modules = {};
     this.slider = findDom(this.root, `.${cssSliderContainer}`);
     this.items = [];
+    this.#initialize();
+  }
 
+  /**
+   * Initialize Sliderm HTML structure.
+   */
+  #initialize() {
     // Event: initialize
     this.emit('initialize');
 
@@ -36,18 +42,8 @@ export default class Sliderm {
     this.#updateGroupCount();
     this.#beforeMountExtensions();
     this.#mountExtensions();
-    this.#initialize();
-    this.slideTo(1);
-
-    // Event: initialized
-    this.emit('initialized');
-  }
-
-  /**
-   * Initialize Sliderm HTML structure.
-   */
-  #initialize() {
     this.go('init');
+    this.go('breakpoint');
     this.go('loop');
     this.go('align');
     this.go('preview');
@@ -57,7 +53,11 @@ export default class Sliderm {
       this.go('grouping', item, index);
       this.go('clone', item, index);
     });
+    this.slideTo(1);
     this.initialized = true;
+
+    // Event: initialized
+    this.emit('initialized');
   }
 
   /**
@@ -202,7 +202,7 @@ export default class Sliderm {
   }
 
   /**
-   * Get options.
+   * Get an option.
    *
    * @param {String} field The name of a field in options.
    * @param {Mixed} defailts The default value as the field doesn't exists.
@@ -212,14 +212,31 @@ export default class Sliderm {
     const option = this.options[field] !== undefined ? this.options[field] : defaults;
     if (field.includes('.')) {
       try {
-        const subOptions = field.split('.');
-        return this.options[`_${subOptions[0]}`][subOptions[1]];
+        const [a, b] = field.split('.');
+        return this.options[`_${a}`][b];
       } catch (err) {
-        error(err);
         return defaults;
       }
     }
     return option;
+  }
+
+  /**
+   * Update an option.
+   *
+   * @param {String} field The name of a field in options.
+   * @param {Mixed} value The value to update the field.
+   */
+  updateOption(field, value) {
+    if (field.includes('.')) {
+      try {
+        const [a, b] = field.split('.');
+        this.options[`_${a}`][b] = value;
+        // eslint-disable-next-line no-empty
+      } catch (err) {}
+      return;
+    }
+    this.options[field] = value;
   }
 
   /**

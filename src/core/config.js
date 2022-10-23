@@ -46,6 +46,13 @@ export default {
   preview: false,
 
   /**
+   * Make the slider responsive.
+   *
+   * @type {Boolean}
+   */
+  breakpoint: true,
+
+  /**
    * How many items per view
    *
    * @type {Boolean}
@@ -161,5 +168,25 @@ export default {
      * @type {String}
      */
     color: '#1cbbb4',
+  },
+
+  /**
+   * The customized options for responsive.
+   *
+   * @type {Object}
+   */
+  _breakpoint: {
+    /**
+     * The breakpoints used to change the columns in visible area of the slider.
+     * To disable the breakpoint, set it to false.
+     *
+     * @type {Object}
+     */
+    columns: {
+      4: false,
+      3: 960,
+      2: 768,
+      1: 420,
+    },
   },
 };
