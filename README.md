@@ -2,7 +2,7 @@
 
 ![Test](https://github.com/terrylinooo/sliderm.js/actions/workflows/testing.yml/badge.svg) [![codecov](https://codecov.io/gh/terrylinooo/sliderm.js/branch/master/graph/badge.svg?token=poJlzJqTlq)](https://codecov.io/gh/terrylinooo/sliderm.js)
 
-Sliderm is a slider and carousel JavaScript library that has only packed size is less than 16 KB.
+Sliderm is a slider and carousel JavaScript library that has only packed size is less than 19 KB.
 
 This library is still under construction, please don't use it until the first release.
 
@@ -14,15 +14,11 @@ Install
 npm install sliderm
 ```
 
-CSS
+Import
 
-```html
-<link rel="stylesheet" href="node_modules/sliderm/dist/css/sliderm.css">
 ```
-
-JS
-```html
-<script src="node_modules/sliderm/dist/js/sliderm.js"></script>
+import Sliderm from 'sliderm';
+import 'sliderm/src/assets/scss/index.scss';
 ```
 
 ## Examples
