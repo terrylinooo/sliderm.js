@@ -53,6 +53,13 @@ export default {
   breakpoint: true,
 
   /**
+   * Add support for mobile devices to touch left and right swipe.
+   *
+   * @type {Boolean}
+   */
+  touch: true,
+
+  /**
    * How many items per view
    *
    * @type {Boolean}
@@ -188,5 +195,25 @@ export default {
       2: 768,
       1: 420,
     },
+  },
+
+  /**
+   * The customized options for touch.
+   *
+   * @type {Object}
+   */
+  _touch: {
+    /**
+     * The minimum distance traveled to be considered a swipe.
+     *
+     * @type {Number} pixel
+     */
+    threshold: 10,
+    /**
+     * The maximum time spent to be considered a swipe.
+     *
+     * @type {Number} millisecond
+     */
+    time: 300,
   },
 };

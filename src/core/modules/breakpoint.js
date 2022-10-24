@@ -5,8 +5,7 @@
  * @param {Element} slider The DOM element of the slider container.
  */
 export default function breakpoint(sliderm, slider) {
-  const enable = sliderm.getOption('breakpoint');
-  if (!enable) {
+  if (!sliderm.getOption('breakpoint')) {
     return;
   }
 
@@ -24,14 +23,14 @@ export default function breakpoint(sliderm, slider) {
   };
 
   /**
-   * Detect the width of the window to see if it hit the breakpoint.
-   *
-   * @param {Object} breakpoints The breakpoint settings.
-   * @param {Number} columns The columns setting.
+   * Initialize.
    */
-  const detect = (breakpoints, columns) => {
+  const init = () => {
+    const columns = sliderm.getOption('columns');
+    const breakpoints = sliderm.getOption('breakpoint.columns');
     const current = Number(slider.getAttribute('data-columns'));
     const column = calculate(breakpoints, columns);
+    slider.setAttribute('data-columns', columns);
 
     if (column !== undefined && current !== column) {
       const items = sliderm.getItems();
@@ -45,13 +44,6 @@ export default function breakpoint(sliderm, slider) {
       // Notice others the breakpoint has changed.
       sliderm.emit('breakpoint.changed');
     }
-  };
-
-  const init = () => {
-    const columns = sliderm.getOption('columns');
-    const breakpoints = sliderm.getOption('breakpoint.columns');
-    slider.setAttribute('data-columns', columns);
-    detect(breakpoints, columns);
   };
 
   init();

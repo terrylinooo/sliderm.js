@@ -46,6 +46,7 @@ export default class Sliderm {
     this.go('breakpoint');
     this.go('loop');
     this.go('align');
+    this.go('touch');
     this.go('preview');
     this.items.forEach((item, index) => {
       this.go('columns', item);

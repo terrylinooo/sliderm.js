@@ -10,6 +10,7 @@ import preview from './modules/preview';
 import spacing from './modules/spacing';
 import clone from './modules/clone';
 import align from './modules/align';
+import touch from './modules/touch';
 import move from './modules/slide';
 import loop from './modules/loop';
 import init from './modules/init';
@@ -23,6 +24,7 @@ export const modules = [
   preview,
   spacing,
   align,
+  touch,
   clone,
   move,
   loop,
