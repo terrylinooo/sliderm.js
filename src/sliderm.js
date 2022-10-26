@@ -48,6 +48,7 @@ export default class Sliderm {
     this.go('align');
     this.go('touch');
     this.go('preview');
+    this.go('autoplay');
     this.items.forEach((item, index) => {
       this.go('columns', item);
       this.go('spacing', item);

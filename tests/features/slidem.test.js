@@ -4,7 +4,7 @@ import demoComponent from '../fixtures/demo-component';
 import demoModule from '../fixtures/demo-module';
 import Sliderm from '../../src/sliderm';
 
-describe('Unit testing for module slide...', () => {
+describe('Unit testing for Slidem main class...', () => {
   let sliderm = null;
 
   beforeEach(() => {
@@ -27,6 +27,20 @@ describe('Unit testing for module slide...', () => {
     sliderm = new Sliderm('.sliderm');
     expect(sliderm.getOption('option_not_exist', 'hello')).toBe('hello');
     expect(sliderm.getOption('option_not_exist.option', 'hello')).toBe('hello');
+  });
+
+  test('Test to use the method - updateOption.', () => {
+    sliderm = new Sliderm('.sliderm');
+    sliderm.updateOption('preview', false);
+    expect(sliderm.getOption('preview')).toBe(false);
+    sliderm.updateOption('preview', true);
+    expect(sliderm.getOption('preview')).toBe(true);
+    sliderm.updateOption('preview.edge', 50);
+    expect(sliderm.getOption('preview.edge')).toBe(50);
+    sliderm.updateOption('preview.edge', 60);
+    expect(sliderm.getOption('preview.edge')).toBe(60);
+    sliderm.updateOption('setting_not_exist.test', 60);
+    expect(sliderm.getOption('setting_not_exist.test')).toBe(null);
   });
 
   test('Test to use the method - go.', () => {

@@ -3,6 +3,7 @@
 /* eslint-disable no-unused-vars */
 const TerserPlugin = require('terser-webpack-plugin');
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const sassParser = require('sass');
 
 const distDir = '../dist';
@@ -19,6 +20,7 @@ module.exports = (env, argv) => ({
           keep_fnames: true,
         },
       }),
+      new CssMinimizerPlugin(),
     ],
   },
   entry: {

@@ -60,6 +60,13 @@ export default {
   touch: true,
 
   /**
+   * Autoplay the carousel.
+   *
+   * @type {Boolean}
+   */
+  autoplay: false,
+
+  /**
    * How many items per view
    *
    * @type {Boolean}
@@ -214,6 +221,26 @@ export default {
      *
      * @type {Number} millisecond
      */
-    time: 300,
+    duration: 300,
+  },
+
+  /**
+   * The customized options for autoplay.
+   *
+   * @type {Object}
+   */
+  _autoplay: {
+    /**
+     * The direction that slider items will move.
+     *
+     * @type {String}
+     */
+    direction: 'left',
+    /**
+     * The time to stay and then play the next.
+     *
+     * @type {Number} millisecond
+     */
+    duration: 5000,
   },
 };

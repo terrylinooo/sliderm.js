@@ -14,7 +14,7 @@ export default function touch(sliderm, slider) {
    */
   const init = () => {
     const threshold = sliderm.getOption('touch.threshold');
-    const touchTime = sliderm.getOption('touch.time');
+    const duration = sliderm.getOption('touch.duration');
     const event = sliderm.adaptEvent(slider);
     const start = {
       x: 0,
@@ -41,7 +41,7 @@ export default function touch(sliderm, slider) {
       const distance = Math.abs(obj.pageX - start.x);
 
       // The condition of swipe not met.
-      if (time > touchTime || distance < threshold) {
+      if (time > duration || distance < threshold) {
         return;
       }
       const direction = obj.pageX > start.x ? '>' : '<';

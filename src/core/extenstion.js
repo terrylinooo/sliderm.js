@@ -4,6 +4,7 @@ import arrow from '../components/arrow';
 import transition from './modules/transition';
 import breakpoint from './modules/breakpoint';
 import trasnform from './modules/transform';
+import autoplay from './modules/autoplay';
 import grouping from './modules/grouping';
 import columns from './modules/columns';
 import preview from './modules/preview';
@@ -19,6 +20,7 @@ export const modules = [
   breakpoint,
   transition,
   trasnform,
+  autoplay,
   grouping,
   columns,
   preview,

@@ -17,6 +17,9 @@ describe('Unit testing for the configuration...', () => {
     expect(config.duration).toBe(1000);
     expect(config.spacing).toBe(10);
     expect(config.align).toBe('center');
+    expect(config.touch).toBe(true);
+    expect(config.breakpoint).toBe(true);
+    expect(config.autoplay).toBe(false);
     expect(config.extensions).toMatchObject([]);
     expect(config._arrow).toMatchObject({
       color: '#ffffff',
@@ -31,6 +34,22 @@ describe('Unit testing for the configuration...', () => {
     });
     expect(config._spinner).toMatchObject({
       color: '#1cbbb4',
+    });
+    expect(config._breakpoint).toMatchObject({
+      columns: {
+        4: false,
+        3: 960,
+        2: 768,
+        1: 420,
+      },
+    });
+    expect(config._touch).toMatchObject({
+      threshold: 10,
+      duration: 300,
+    });
+    expect(config._autoplay).toMatchObject({
+      direction: 'left',
+      duration: 5000,
     });
   });
 });

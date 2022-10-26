@@ -1,6 +1,6 @@
 {
   "name": "sliderm",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "The most light-weight dependency-free slider and carousel JavaScript library.",
   "main": "dist/sliderm.js",
   "module": "src/sliderm.js",
@@ -37,6 +37,7 @@
     "babel-jest": "^29.2.0",
     "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
+    "css-minimizer-webpack-plugin": "^4.2.2",
     "eslint": "^8.24.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.26.0",
