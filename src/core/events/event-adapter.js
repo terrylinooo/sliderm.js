@@ -56,4 +56,16 @@ export default class EventAdapter {
     }
     delete this.events;
   }
+
+  /**
+   * Mock to dispatch an event for current target.
+   *
+   * @param {String} event
+   * @param {Object} dispatchEvent
+   */
+  mock(event, dispatchEvent) {
+    if (typeof this.events[event] !== 'undefined') {
+      this.events[event](dispatchEvent);
+    }
+  }
 }

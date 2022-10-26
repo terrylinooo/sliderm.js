@@ -18,15 +18,13 @@ describe('Unit testing for component pagination...', () => {
       touch: true,
     });
 
-    const touchEventStart = touchEventFactory('touchstart', 'left', 0);
-    const touchEventMove = touchEventFactory('touchmove', 'left', 15);
-    const touchEventEnd = touchEventFactory('touchend', 'left', 30);
-    const sliderEvent = sliderm.domEvents.filter((e) => e.events.touchstart !== undefined)[0];
     position = sliderm.getPosition();
     expect(position).toBe(1);
-    sliderEvent.events.touchstart(touchEventStart);
-    sliderEvent.events.touchmove(touchEventMove);
-    sliderEvent.events.touchend(touchEventEnd);
+
+    const sliderEvent = sliderm.domEvents.filter((e) => e.events.touchstart !== undefined)[0];
+    sliderEvent.mock('touchstart', touchEventFactory('touchstart', 'left', 0));
+    sliderEvent.mock('touchmove', touchEventFactory('touchmove', 'left', 15));
+    sliderEvent.mock('touchend', touchEventFactory('touchend', 'left', 30));
     position = sliderm.getPosition();
     expect(position).toBe(2);
   });
@@ -39,15 +37,13 @@ describe('Unit testing for component pagination...', () => {
 
     jest.useFakeTimers();
 
-    const touchEventStart = touchEventFactory('touchstart', 'right', 0);
-    const touchEventMove = touchEventFactory('touchmove', 'right', 15);
-    const touchEventEnd = touchEventFactory('touchend', 'right', 30);
-    const sliderEvent = sliderm.domEvents.filter((e) => e.events.touchstart !== undefined)[0];
     position = sliderm.getPosition();
     expect(position).toBe(1);
-    sliderEvent.events.touchstart(touchEventStart);
-    sliderEvent.events.touchmove(touchEventMove);
-    sliderEvent.events.touchend(touchEventEnd);
+
+    const sliderEvent = sliderm.domEvents.filter((e) => e.events.touchstart !== undefined)[0];
+    sliderEvent.mock('touchstart', touchEventFactory('touchstart', 'right', 0));
+    sliderEvent.mock('touchmove', touchEventFactory('touchmove', 'right', 15));
+    sliderEvent.mock('touchend', touchEventFactory('touchend', 'right', 30));
     position = sliderm.getPosition();
     expect(position).toBe(0);
 
