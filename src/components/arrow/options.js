@@ -1,48 +1,50 @@
+import { isInteger } from '../../utilities/number';
+
 /**
  * Get the bold style of the arrow buttons.
  *
- * @param {String} bold The bold type.
+ * @param {String} arg The bold type.
  * @return {String}
  */
-export const bold = (bold) => {
+export const bold = (arg) => {
   const boldTypes = {
     1: 'thin',
     2: 'regular', // default
     3: 'bold',
   };
-  return boldTypes[bold] !== undefined ? boldTypes[bold] : 'regular';
+  return boldTypes[arg] !== undefined ? boldTypes[arg] : 'regular';
 };
-  
+
 /**
  * Get the shape of the arrow buttons.
  *
- * @param {String} bold The shape type.
+ * @param {String} arg The shape type.
  * @return {String}
  */
-export const shape = (shape) => {
-  if (shape === 'none' || shape === 'square') {
-    return shape;
+export const shape = (arg) => {
+  if (arg === 'none' || arg === 'square') {
+    return arg;
   }
-  return 'circle';  // default
+  return 'circle'; // default
 };
 
 /**
  * Get the font size of the arrow buttons.
  *
- * @param {String} size The font size.
+ * @param {String} arg The font size.
  * @return {Number|Null}
  */
-export const size = (size) => {
-  if (Number(size) === NaN || size === 16) {
+export const size = (arg) => {
+  if (!isInteger(arg) || arg === 16) {
     return null;
   }
-  if (size <= 13) {
+  if (arg <= 13) {
     return 13;
   }
-  if (size >= 28) {
+  if (arg >= 28) {
     return 28;
   }
-  return size;
+  return arg;
 };
 
 /**
@@ -51,12 +53,12 @@ export const size = (size) => {
  * @param {String} color The hex color code.
  * @return {String}
  */
-export const bgColor = (color) => {
-  if (color !== '#000000') {
-    return color;
+export const bgColor = (arg) => {
+  if (arg !== '#000000') {
+    return arg;
   }
   return null;
-}
+};
 
 /**
  * Get the font color.
@@ -64,22 +66,22 @@ export const bgColor = (color) => {
  * @param {String} color The hex color code.
  * @return {String}
  */
-export const color = (color) => {
-  if (color !== '#ffffff') {
-    return color;
+export const color = (arg) => {
+  if (arg !== '#ffffff') {
+    return arg;
   }
   return null;
-}
+};
 
 /**
  * Get the font color.
  *
- * @param {Number} color The hex color code.
+ * @param {Number} arg The hex color code.
  * @return {Number|Null}
  */
-export const opacity = (opacity) => {
-  if (Number(opacity) === NaN || opacity > 1 || opacity < 0.1 || opacity === 0.5) {
+export const opacity = (arg) => {
+  if (!isInteger(arg) || arg > 1 || arg < 0.1 || arg === 0.5) {
     return null;
   }
-  return opacity;
-}
+  return arg;
+};

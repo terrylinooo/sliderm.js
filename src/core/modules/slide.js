@@ -19,20 +19,12 @@ export default function slide(sliderm, slider, ...args) {
   const isClone = isLoop || isPreview;
   const maxPosition = page.maximum();
   let calculatedPosition = page.calculate(direction, false);
-  let isReposition = false;
+  const isReposition = calculatedPosition < 1 || calculatedPosition > maxPosition;
   let distance = 1;
   let axis = 0;
 
-  if (!isLoop) {
-    if (calculatedPosition > maxPosition || calculatedPosition === 0) {
-      return;
-    }
-  }
-
-  if (calculatedPosition < 1) {
-    isReposition = true;
-  } else if (calculatedPosition > maxPosition) {
-    isReposition = true;
+  if (!isLoop && isReposition) {
+    return;
   }
 
   if (isGrouping) {

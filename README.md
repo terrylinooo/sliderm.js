@@ -21,6 +21,10 @@ import Sliderm from 'sliderm';
 import 'sliderm/src/assets/scss/index.scss';
 ```
 
+## Options
+
+
+
 ## Examples
 
 The HTML makup is required for intializing sliderm.
@@ -29,31 +33,37 @@ The HTML makup is required for intializing sliderm.
 
 ```html
 <div class="sliderm your-class-name">
-    <div class="sliderm__slider">
-        <div class="sliderm__slides">
-            <div class="sliderm__slide"><img src="./demo/1.jpg" /></div>
-            <div class="sliderm__slide"><img src="./demo/2.jpg" /></div>
-            <div class="sliderm__slide"><img src="./demo/3.jpg" /></div>
-            <div class="sliderm__slide"><img src="./demo/4.jpg" /></div>
-            <div class="sliderm__slide"><img src="./demo/5.jpg" /></div>
-        </div>
+  <div class="sliderm__slider">
+    <div class="sliderm__slides">
+        <div class="sliderm__slide"><img src="./demo/1.jpg" /></div>
+        <div class="sliderm__slide"><img src="./demo/2.jpg" /></div>
+        <div class="sliderm__slide"><img src="./demo/3.jpg" /></div>
+        <div class="sliderm__slide"><img src="./demo/4.jpg" /></div>
+        <div class="sliderm__slide"><img src="./demo/5.jpg" /></div>
     </div>
+  </div>
 </div>
 ```
 
 #### JavaScript
 
 ```javascript
- const sliderm = new Sliderm('.your-class-name', {
-    arrow: true,
-    pagination: true,
-    grouping: false,
-    loop: true,
-    preview: false,
-    columns: 4,
-    duration: 1000,
-    spacing: 10,
-    align: 'center',
+const sliderm = new Sliderm('.your-class-name', {
+  arrow: true,
+  pagination: true,
+  grouping: false,
+  loop: true,
+  preview: false,
+  columns: 4,
+  duration: 1000,
+  spacing: 10,
+  align: 'center',
+  _arrow: {
+    bold: 3,
+  },
+  _autoplay: {
+    direction: 'right',
+  }
 });
 
 sliderm.on('slide.start', () => {

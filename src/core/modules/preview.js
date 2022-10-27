@@ -5,8 +5,7 @@
  * @param {Element} slider The DOM element of the slider container.
  */
 export default function preview(sliderm, slider) {
-  const isPreview = sliderm.getOption('preview');
-  if (!isPreview) {
+  if (!sliderm.getOption('preview')) {
     return;
   }
   const edge = sliderm.getOption('preview.edge');

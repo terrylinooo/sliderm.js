@@ -163,7 +163,7 @@ export default {
    */
   _preview: {
     /**
-     * Display the edge of the previous and next items.
+     * The width of the edge of the previous and next items.
      *
      * @type {Number}
      */
@@ -177,7 +177,7 @@ export default {
    */
   _spinner: {
     /**
-     * The spinner's color.
+     * The color of the spinner.
      *
      * @type {String}
      */
@@ -231,7 +231,7 @@ export default {
    */
   _autoplay: {
     /**
-     * The direction that slider items will move.
+     * The direction that slider items will move on.
      *
      * @type {String}
      */
