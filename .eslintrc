@@ -24,6 +24,7 @@
   "rules": {
     "prettier/prettier": "error",
     "object-curly-newline": 0,
-    "operator-linebreak": 0
+    "operator-linebreak": 0,
+    "complexity": ["error", 10]
   }
 }
