@@ -1,10 +1,29 @@
-# Sliderm
+# ![Sliderm - Slider and Carousel JavaScript Library](https://i.imgur.com/C5fGYJ5.png)
 
-![Test](https://github.com/terrylinooo/sliderm.js/actions/workflows/testing.yml/badge.svg) [![codecov](https://codecov.io/gh/terrylinooo/sliderm.js/branch/master/graph/badge.svg?token=poJlzJqTlq)](https://codecov.io/gh/terrylinooo/sliderm.js)
+![Test](https://github.com/terrylinooo/sliderm.js/actions/workflows/testing.yml/badge.svg) [![codecov](https://codecov.io/gh/terrylinooo/sliderm.js/branch/master/graph/badge.svg?token=poJlzJqTlq)](https://codecov.io/gh/terrylinooo/sliderm.js) [![DeepScan grade](https://deepscan.io/api/teams/19398/projects/22800/branches/678024/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=19398&pid=22800&bid=678024)
 
-Sliderm is a slider and carousel JavaScript library that has only packed size is less than 19 KB.
 
-This library is still under construction, please don't use it until the first release.
+Sliderm is a slider & carousel JavaScript library. The packed size of `sliderm.js` is less than 19 KB, lightweight but feature-rich.
+
+- Dependency-free.
+- Code quality check passed and fully tested with 100% coverage rate.
+- Flexible, easy to extend by writing your own extensions.
+
+## Documentaion
+
+- Website: https://sliderm.com
+- Demo: https://sliderm.com/demo
+
+## Features
+
+- Design for mobile devices:
+    - Multiple breakpoints.
+    - Touch to swipe.
+    - Preview the edge of the previous and next slide items.
+- Autoplay.
+- Infinite loop.
+- Slide grouping items or single one.
+- and more... check out [configuration options](https://sliderm.com/docs/options) for more details.
 
 ## Getting started
 
@@ -21,13 +40,9 @@ import Sliderm from 'sliderm';
 import 'sliderm/src/assets/scss/index.scss';
 ```
 
-## Options
-
-
-
 ## Examples
 
-The HTML makup is required for intializing sliderm.
+The HTML makeup is required for intializing sliderm.
 
 #### HTML
 
@@ -58,12 +73,6 @@ const sliderm = new Sliderm('.your-class-name', {
   duration: 1000,
   spacing: 10,
   align: 'center',
-  _arrow: {
-    bold: 3,
-  },
-  _autoplay: {
-    direction: 'right',
-  }
 });
 
 sliderm.on('slide.start', () => {
@@ -75,7 +84,7 @@ sliderm.on('slide.end', () => {
 });
 ```
 
-The detailed demonstrations will be put on the official documentation website: [sliderm.com](sliderm.com).
+The detailed demonstrations will be put on the official documentation website.
 
 ## License
 
