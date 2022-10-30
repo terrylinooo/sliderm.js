@@ -13,8 +13,11 @@ Sliderm is a slider & carousel JavaScript library. The packed size of `sliderm.j
 
 - Website: https://sliderm.com
 - Demo: https://sliderm.com/demo
+- Try it yourself: https://jsfiddle.net/terrylinooo/z8j0cLop/
 
 ## Features
+
+![Slider DEMO](https://i.imgur.com/TZdRQVb.gifg)
 
 - Design for mobile devices:
     - Multiple breakpoints.

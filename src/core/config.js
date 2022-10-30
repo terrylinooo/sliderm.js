@@ -235,7 +235,7 @@ export default {
      *
      * @type {String}
      */
-    direction: 'left',
+    direction: 'right',
     /**
      * The time to stay and then play the next.
      *

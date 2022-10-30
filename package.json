@@ -1,6 +1,6 @@
 {
   "name": "sliderm",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "The most light-weight dependency-free slider and carousel JavaScript library.",
   "main": "dist/sliderm.js",
   "module": "src/index.js",

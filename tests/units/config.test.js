@@ -48,7 +48,7 @@ describe('Unit testing for the configuration...', () => {
       duration: 300,
     });
     expect(config._autoplay).toMatchObject({
-      direction: 'left',
+      direction: 'right',
       duration: 5000,
     });
   });
