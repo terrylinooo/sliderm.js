@@ -170,19 +170,18 @@ export default class Sliderm {
   }
 
   /**
-   * Get the current position, right beign on the visable area of slider.
+   * Get the current position in the visible area of slider.
    *
-   * @return {Array}
+   * @return {Number}
    */
   getPosition() {
     return this.position;
   }
 
   /**
-   * Set the current position.
+   * Update the current position number.
    *
    * @param {Number} position The postition number.
-   * @return {Array}
    */
   updatePosition(position) {
     this.position = position;
@@ -269,29 +268,28 @@ export default class Sliderm {
   /**
    * Register an event listener.
    *
-   * @param {String} name The event name of each event listener.
-   * @param {Function} handler The callback function of each event listener.
-   * @param {Number} priority The priority of each event listener.
+   * @param {String} name The event name.
+   * @param {Function} handler The callback function.
    */
-  on(name, handler, priority = 0) {
-    this.event.on(name, handler, priority);
+  on(name, handler) {
+    this.event.on(name, handler);
   }
 
   /**
    * Remove an event listener.
    *
-   * @param {String} name The event name of each event listener.
-   * @param {Function} handler Used to identify the memory position to remove it.
+   * @param {String} name The event name.
+   * @param {Function} handler The callback function.
    */
   off(name, handler) {
     this.event.off(name, handler);
   }
 
   /**
-   * Execute the registered closure function.
+   * Execute the registered function.
    *
    * @param {String} name The event name of each event listener.
-   * @param {Number} priority The priority of each event listener.
+   * @param {...any} args The agruments.
    */
   emit(name, ...args) {
     const thisArgs = [this, ...args];

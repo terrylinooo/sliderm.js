@@ -10,8 +10,8 @@ export default class EventDispatcher {
   /**
    * Register an event listener.
    *
-   * @param {String} name The event name of each event listener.
-   * @param {Function} handler The callback function of each event listener.
+   * @param {String} name The event name.
+   * @param {Function} handler The callback function.
    */
   on(name, handler) {
     if (!Object.prototype.hasOwnProperty.call(this.events, name)) {
@@ -23,7 +23,7 @@ export default class EventDispatcher {
   /**
    * Remove an event listener.
    *
-   * @param {String} name The event name of each event listener.
+   * @param {String} name The event name.
    * @param {Function} handler Named function used to indicate the memory reference to remove it.
    */
   off(name, handler) {
@@ -41,8 +41,8 @@ export default class EventDispatcher {
   /**
    * Execute the registered closure.
    *
-   * @param {String} name The event name of each event listener.
-   * @param {Number} priority The priority of each event listener.
+   * @param {String} name The event name.
+   * @param {...any} args The agruments.
    */
   emit(name, ...args) {
     if (this.events[name] === undefined || !Array.isArray(this.events[name])) {
