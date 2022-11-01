@@ -8,6 +8,7 @@ const sassParser = require('sass');
 
 const distDir = '../dist';
 const sliderm = ['./src/index.js', './src/assets/scss/index.scss'];
+const slidermPlus = ['./src/plus.js', './src/assets/scss/plus.scss'];
 
 module.exports = (env, argv) => ({
   optimization: {
@@ -25,6 +26,7 @@ module.exports = (env, argv) => ({
   },
   entry: {
     sliderm,
+    'sliderm.plus': slidermPlus,
   },
   output: {
     filename: `${distDir}/js/[name].js`,
