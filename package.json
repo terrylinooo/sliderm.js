@@ -11,7 +11,8 @@
     "coverage": "npm test -- --coverage"
   },
   "jest": {
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "collectCoverageFrom": ["./src/**"]
   },
   "repository": {
     "type": "git",
